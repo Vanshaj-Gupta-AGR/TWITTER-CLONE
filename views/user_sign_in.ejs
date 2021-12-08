@@ -1,8 +1,38 @@
-<h1>Sign In</h1>
+<link rel="stylesheet" href="/css/temp.css">
+<div class="parent clearfix">
+    <div class="bg-illustration">
+      <img src="https://i.ibb.co/Pcg0Pk1/logo.png" alt="logo">
 
-<form action="/users/create-session" method="POST">
-    <input type="email" name="email" placeholder="Email"  required>
-    <input type="password" name="password" placeholder="Password"  required>
-    <input type="submit" value="Sign In">
+      <div class="burger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-</form>
+    </div>
+    
+    <div class="login">
+      <div class="container">
+        <h1>Login to access to<br />your account</h1>
+    
+        <div class="login-form">
+            <form action="/users/create-session" method="POST">
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+            <div class="remember-form">
+              <input type="checkbox">
+              <span>Remember me</span>
+            </div>
+            <div class="forget-pass">
+              <a href="/users/sign-up">SIGN UP ?</a>
+            </div>
+            
+
+            <button type="submit">LOG-IN</button>
+
+          </form>
+        </div>
+    
+      </div>
+      </div>
+  </div>

@@ -3,19 +3,21 @@ const cookieParser=require('cookie-parser');
 const app=express();
 
 const port=8000;
+const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy')
-
+const sassMiddleware=require('node-sass-middleware');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
-const expressLayouts=require('express-ejs-layouts');
-app.use(express.static('./assets'));
+
+app.use(express.static('assets'));
 app.use(expressLayouts);
-app.set('layout extractStyles',true);
-app.set('layout extractScripts',true);
+
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 
 
