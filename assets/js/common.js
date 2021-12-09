@@ -53,13 +53,35 @@ var by=postdata.user;
                   </div>
                   <div class="postContentContainer">
                     <div class="header">
-                    <a href="/users/profile/${by._id}">${by.name}</a>
-                    <span class="username">${by._id}</span>
+                    <a class="displayname" href="/users/profile/${by._id}">${by.name}</a>
+                    <span class="username">${by.name}</span>
+                    <span class="date">${by._id}</span>
                     </div>
                     <div class="postBody">
                     <span>${postdata.content}</span>
                     </div>
                     <div class="postFotter">
+                        <div class="postButtonContainer">
+                            <button>
+                              <i class='far fa-comment'></i>
+                            </button>
+                            
+
+                        </div>
+                        <div class="postButtonContainer">
+                            <button>
+                              <i class='fas fa-retweet'></i>
+                            </button>
+                            
+
+                        </div>
+                        <div class="postButtonContainer">
+                            <button>
+                              <i class='far fa-heart'></i>
+                            </button>
+                            
+
+                        </div>
                     </div>
                   </div>
                 </div>
