@@ -3,6 +3,10 @@
     --buttonhover: #d4edff;
     --lightgrey: rgb(230,236,240);
     --spacing: 15px;
+    --bluelight: #9bd1f9;
+}
+*{
+    outline: none !important;
 }
 
 a{
@@ -31,6 +35,7 @@ nav a{
     height: 55px;
     align-items: center;
     justify-content: center;
+    color: #212529;
 }
 
 nav a:hover{
@@ -62,4 +67,42 @@ h1{
 
 .titleContainer h1{
     flex: 1;
+}
+
+.postFormContainer{
+    display: flex;
+    padding: var(--spacing);
+    border-bottom: 10px solid rgb(230,236,240) ;
+}
+.userImageContainer{
+    width: 50px;
+    height: 50px;
+
+}
+.userImageContainer img{
+    width: 100%;
+    border-radius: 50%;
+    background-color: white;
+}
+.textareaContainer{
+    flex: 1;
+    padding-left: var(--spacing);
+}
+.textareaContainer textarea{
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 19px;
+}
+
+#submitpost{
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 7px 15px;
+}
+#submitpost:disabled{
+    background-color: var(--blue);
+    color: var(--bluelight);
 }

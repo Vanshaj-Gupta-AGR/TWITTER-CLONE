@@ -1,8 +1,10 @@
 const User=require('../models/user')
 
+
+
 module.exports.profile=function(req,res){
     return res.render('profile',{
-        title: "users-profile"
+        title: "users-profile",
     })
 }
 
@@ -13,7 +15,8 @@ module.exports.signUp = function(req, res){
 
 
     return res.render('user_sign_up', {
-        title: "Twitter | Sign Up"
+        title: "Twitter | Sign Up",
+        layout: "layout2"
     })
 }
 
@@ -25,7 +28,8 @@ module.exports.signIn = function(req, res){
         return res.redirect('/users/profile');
     }
     return res.render('user_sign_in', {
-        title: "Twitter | Sign In"
+        title: "Twitter | Sign In",
+        layout: "layout2"
     })
 }
 

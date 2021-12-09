@@ -1,2 +1,13 @@
 
-<h1>hiiii</h1>
+<h1><%= user.email %></h1>
+<div class="postFormContainer">
+    <div class="userImageContainer">
+        <img src="<%= user.profilePic %> "alt="your image">
+    </div>
+    <div class="textareaContainer">
+        <textarea id="posttextarea" placeholder="whats happening" ></textarea>
+        <div class="buttonsContainer">
+            <button id="submitpost" type="submit" disabled >post</button>
+        </div>
+    </div>
+</div>
