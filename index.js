@@ -9,11 +9,12 @@ const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy')
 const sassMiddleware=require('node-sass-middleware');
+const path=require('path');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
 
-app.use(express.static('assets'));
+app.use(express.static('./assets'));
 app.use(expressLayouts);
 
 app.set('layout extractStyles', true);
