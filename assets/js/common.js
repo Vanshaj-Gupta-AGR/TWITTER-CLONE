@@ -41,12 +41,85 @@ $('#submitpost').click((event)=>{
 
 })
 
+function timeDifference(current, previous) {
+
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+        if(elapsed/1000<30){
+            return "just now";
+        }
+         return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else if (elapsed < msPerMonth) {
+        return Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+
+    else if (elapsed < msPerYear) {
+        return  Math.round(elapsed/msPerMonth) + ' months ago';   
+    }
+
+    else {
+        return  Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
+}
+let user3;
+
+$(document).on("click",".likebutton",(event)=>{
+    var btn=$(event.target);
+
+    var postId=getid(btn);
+
+  
+
+   $.ajax({
+      url: `/api/posts/${postId}/like`,
+      type: "PUT",
+      success: (postdata)=>{
+         btn.find('span').html(postdata.likes.length || "");
+         
+      
+      }
+     
+
+  })
+  location.reload();
+
+   
+});
+
+function getid(element){
+
+    var isroot=element.hasClass("post");
+
+    var rootelement=isroot? element : element.closest(".post");
+
+    var postid=rootelement.data().id;
+
+    return postid;
+}
+
 function createPostHtml(postdata){
 var by=postdata.user;
+var timestamp=timeDifference(new Date(),new Date(postdata.createdAt));
 
 
-
-    return `<div class="post">
+    return `<div class="post" data-id="${postdata._id}">
                 <div class="mainContentContainer">
                  <div class="userImageContainer">
                   <img src="${by.profilePic}">
@@ -54,8 +127,8 @@ var by=postdata.user;
                   <div class="postContentContainer">
                     <div class="header">
                     <a class="displayname" href="/users/profile/${by._id}">${by.name}</a>
-                    <span class="username">${by.name}</span>
-                    <span class="date">${by._id}</span>
+                    <span class="username">@${by.name}</span>
+                    <span class="date">${timestamp}</span>
                     </div>
                     <div class="postBody">
                     <span>${postdata.content}</span>
@@ -69,15 +142,16 @@ var by=postdata.user;
 
                         </div>
                         <div class="postButtonContainer">
-                            <button>
+                            <button class="retweet">
                               <i class='fas fa-retweet'></i>
                             </button>
                             
 
                         </div>
                         <div class="postButtonContainer">
-                            <button>
+                            <button class="likebutton likeButtoClass">
                               <i class='far fa-heart'></i>
+                              <span>${postdata.likes.length || ""}</span>
                             </button>
                             
 
@@ -87,3 +161,4 @@ var by=postdata.user;
                 </div>
                 </div>`
 }
+

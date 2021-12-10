@@ -26,3 +26,49 @@ module.exports.create = async function(req, res){
     }
   
 }
+
+module.exports.show= async function(req,res){
+    try{
+        let post=await Post.find();
+     
+
+        post=await User.populate(post,{path: "user"});
+
+        if(post){
+            return res.status(200).send(post);
+        }
+
+
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+module.exports.update=async function(req,res){
+    try{
+    
+     
+     var islike=req.user.likes && req.user.likes.includes(req.params.id);
+
+     var option =islike ? "$pull" : "$addToSet"
+
+      await   User.findByIdAndUpdate(req.user._id,{[option]: {likes: req.params.id}});
+        
+     
+     var post=await  Post.findByIdAndUpdate(req.params.id,{[option]: {likes: req.user._id}});
+
+     return res.status(200).send(post)
+     
+
+
+
+
+    }catch(err){
+        console.log(err);
+
+    }
+
+
+
+}
