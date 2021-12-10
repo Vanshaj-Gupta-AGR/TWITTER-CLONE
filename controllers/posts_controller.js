@@ -20,7 +20,7 @@ module.exports.create = async function(req, res){
 
     }catch(err){
        
-        // added this to view the error on console as well
+      
         console.log(err);
         return res.redirect('back');
     }
@@ -53,10 +53,10 @@ module.exports.update=async function(req,res){
 
      var option =islike ? "$pull" : "$addToSet"
 
-      await   User.findByIdAndUpdate(req.user._id,{[option]: {likes: req.params.id}});
+     req.user=await   User.findByIdAndUpdate(req.user._id,{[option]: {likes: req.params.id}},{new: true});
         
      
-     var post=await  Post.findByIdAndUpdate(req.params.id,{[option]: {likes: req.user._id}});
+     var post=await  Post.findByIdAndUpdate(req.params.id,{[option]: {likes: req.user._id}},{new: true});
 
      return res.status(200).send(post)
      
@@ -70,5 +70,48 @@ module.exports.update=async function(req,res){
     }
 
 
+
+}
+
+module.exports.retweet=async function(req,res){
+
+    try{
+         
+        var deletedPost=await Post.findOneAndDelete({user: req.user._id,retweetData: req.params.id});
+
+
+
+     
+       
+   
+        var option =deletedPost!=null ? "$pull" : "$addToSet"
+
+        var repost=deletedPost;
+
+        if(repost==null){
+            repost=await Post.create({
+                user: req.user._id,
+                retweetData: req.params.id
+
+            })
+        }
+   
+         req.user=await  User.findByIdAndUpdate(req.user._id,{[option]: {retweet: repost._id}},{new: true});
+           
+        
+        var post=await  Post.findByIdAndUpdate(req.params.id,{[option]: {retweetUsers: req.user._id}},{new: true});
+   
+        return res.status(200).send(post)
+        
+   
+   
+   
+   
+       }catch(err){
+           console.log(err);
+   
+       }
+   
+   
 
 }
