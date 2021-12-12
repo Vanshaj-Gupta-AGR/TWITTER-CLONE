@@ -6,6 +6,7 @@ const postCreate=require('../../controllers/posts_controller')
 
 router.post('/',postCreate.create)
 router.get('/',postCreate.show);
+router.get('/:id',postCreate.onlyone)
 router.put('/:id/like',postCreate.update);
 router.post('/:id/retweet',postCreate.retweet);
 

@@ -3,10 +3,17 @@ const Post=require('../models/post_schema')
 
 module.exports.create = async function(req, res){
     try{
-        let post = await Post.create({
+
+        var postData={
             content: req.body.content,
             user: req.user._id
-        });
+        }
+
+        if(req.body.replyTo){
+            postData.replyTo= req.body.replyTo;
+        }
+
+        let post = await Post.create(postData);
         
         if (req.xhr){
        
@@ -26,24 +33,27 @@ module.exports.create = async function(req, res){
     }
   
 }
+module.exports.show=  function(req,res){
+    Post.find()
+    .populate("user")
+    .populate({
+        path: 'replyTo',
+        populate: {path: 'user'}
+    })
+    
+    .populate({
+        path: 'retweetData',
+        populate: {path: 'user'}
+    })
+    
+    .sort({"createdAt": -1})
+    .then(results=> res.status(200).send(results))
+    .catch(error =>{
+        console.log(error);
+    })
 
-module.exports.show= async function(req,res){
-    try{
-        let post=await Post.find();
-     
-
-        post=await User.populate(post,{path: "user"});
-
-        if(post){
-            return res.status(200).send(post);
-        }
-
-
-    }
-    catch(err){
-        console.log(err);
-    }
 }
+
 
 module.exports.update=async function(req,res){
     try{
@@ -114,4 +124,23 @@ module.exports.retweet=async function(req,res){
    
    
 
+}
+
+
+module.exports.onlyone=async function(req,res){
+    await Post.findById(req.params.id)
+    .populate("user")
+    .populate({
+        path: 'retweetData',
+        populate: {path: 'user'}
+    })
+    
+    .sort({"createdAt": -1})
+    .then(results=> res.status(200).send(results))
+    .catch(error =>{
+        console.log(error);
+    })
+
+  
+    
 }

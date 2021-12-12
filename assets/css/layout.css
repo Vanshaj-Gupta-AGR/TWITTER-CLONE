@@ -180,6 +180,24 @@ h1{
     color: var(--green);
 }
 
+.postActionContainer{
+    padding-left: 35px;
+    font-size: 13px;
+    color: var(--greybuttonText);
+    margin-bottom: var(--spacing);
+}
+
+.modal .postFormContainer{
+    border: none;
+    padding: 0;
+    padding-top: var(--spacing);
+
+}
+
+.modal .post{
+    padding: 0 0 var(--spacing);
+}
+
 
 
 

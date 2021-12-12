@@ -9,6 +9,11 @@ $(document).ready(()=>{
 function output(result,container){
         container.html("");
 
+        if(!Array.isArray(result)){
+            result=[result]
+        }
+
+
         result.forEach(element => {
             var html=createPostHtml(element);
             container.append(html);

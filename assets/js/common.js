@@ -1,10 +1,16 @@
 $(document).ready(()=>{
 })
-$("#posttextarea").keyup(event=>{
+$("#posttextarea, #replytextarea").keyup(event=>{
     var textbox=$(event.target);
     var value=textbox.val().trim();
 
-    var btn=$('#submitpost');
+    var isModal=textbox.parents(".modal").length == 1;
+
+    
+
+
+
+    var btn=isModal ? $("#submitReplyButton") : $('#submitpost');
 
     if(value!=""){
         btn.prop('disabled',false);
@@ -16,11 +22,12 @@ $("#posttextarea").keyup(event=>{
     }
 })
 
-console.log(user);
 
-$('#submitpost').click((event)=>{
+
+$('#submitpost, #submitReplyButton').click((event)=>{
     var button=$(event.target);
-    var textbox=$('#posttextarea');
+    var isModal=button.parents(".modal").length == 1;
+    var textbox=isModal ? $("#replytextarea"): $('#posttextarea');
 
     
 
@@ -28,16 +35,28 @@ $('#submitpost').click((event)=>{
         content: textbox.val()
        
     }
+
+    var t="";
+
+    if(isModal){
+        t=button.data().id;
+        data.replyTo=t
+
+    }
   
     $.post("/api/posts",data,(postData,status,xhr)=>{
+        if(postData.replyTo){
+            location.reload();
+        }
+        else{
         console.log(postData)
         var html=createPostHtml(postData);
-        console.log(html);
+       
         $('.postsContainer').prepend(html);
         textbox.val("");
         button.prop("disabled",true)
 
-
+        }
 
     })
 
@@ -80,6 +99,28 @@ function timeDifference(current, previous) {
         return  Math.round(elapsed/msPerYear ) + ' years ago';   
     }
 }
+ $("#replyModal").on("show.bs.modal",(event)=>{
+    var btn=$(event.relatedTarget);
+
+    var postId=getid(btn);
+
+    $('#submitReplyButton').data("id",postId);
+
+    $.get("/api/posts/" + postId,(results)=>{
+      output(results,$("#originalPost"))
+
+    })
+
+
+ })
+
+ $("#replyModal").on("hidden.bs.modal",(event)=>{
+    $("#originalPost").html="";
+
+
+
+ })
+
 let user3;
 
 $(document).on("click",".likebutton",(event)=>{
@@ -111,6 +152,20 @@ $(document).on("click",".likebutton",(event)=>{
 
    
 });
+function output(result,container){
+    container.html("");
+
+    if(!(Array.isArray(result))){
+        result=[result];
+    }
+
+    result.forEach(element => {
+        var html=createPostHtml(element);
+        container.append(html);
+
+
+    });
+}
 $(document).on("click",".retweetbutton",(event)=>{
     var btn=$(event.target);
 
@@ -143,6 +198,20 @@ $(document).on("click",".retweetbutton",(event)=>{
    
 });
 
+$(document).on("click",".post",(event)=>{
+
+    var btn=$(event.target);
+
+    var postId=getid(btn);
+
+    if(postId!=undefined && !btn.is('button')){
+
+    window.location.href="/post/" +postId;
+    }
+
+    
+});
+
 function getid(element){
 
     var isroot=element.hasClass("post");
@@ -155,16 +224,59 @@ function getid(element){
 }
 
 function createPostHtml(postdata){
+
+    if(postdata==null){
+        return alert("fuck you");
+    }
+
+   
+
+    var isretweet=postdata.retweetData!=undefined;
+    var retweetedby=isretweet ? postdata.user.name: null;
+
+    postdata=isretweet ? postdata.retweetData : postdata;
+
+  
+
+
+    
+
 var by=postdata.user;
+
+
+
+if(by._id==undefined){
+    return console.log('why the fuck are you here');
+}
+
 var timestamp=timeDifference(new Date(),new Date(postdata.createdAt));
 var likeButtonActiveClass=postdata.retweetUsers.includes(user)? "active":"";
 var likeButtonActiveClass2=postdata.likes.includes(user)? "active":"";
 
+var retweetText='';
 
+if(isretweet){
+    retweetText=`<span> Retweeted by <a href="/profile/${retweetedby}">@${retweetedby}</a></span>`
+}
+
+var replyflag='';
+
+if(postdata.replyTo){
+        replyflag=`<span> Replying To <a href="/profile/${postdata.replyTo.user.name}">${postdata.replyTo.user.name}</a></span>`
+    
+}
 
 
 
     return `<div class="post" data-id="${postdata._id}">
+                <div class="postActionContainer">
+                    ${retweetText}
+                </div>
+               
+                <div class="postActionContainer">
+                ${replyflag}
+                </div>
+
                 <div class="mainContentContainer">
                  <div class="userImageContainer">
                   <img src="${by.profilePic}">
@@ -175,12 +287,15 @@ var likeButtonActiveClass2=postdata.likes.includes(user)? "active":"";
                     <span class="username">@${by.name}</span>
                     <span class="date">${timestamp}</span>
                     </div>
+
+                    
+
                     <div class="postBody">
                     <span>${postdata.content}</span>
                     </div>
                     <div class="postFotter">
                         <div class="postButtonContainer">
-                            <button>
+                            <button data-toggle='modal' data-target="#replyModal">
                               <i class='far fa-comment'></i>
                             </button>
                             
