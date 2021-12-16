@@ -144,3 +144,32 @@ module.exports.onlyone=async function(req,res){
   
     
 }
+
+
+module.exports.delete=async function(req,res){
+    await Post.findByIdAndDelete(req.params.id)
+
+    return res.sendStatus(202);
+
+}
+
+module.exports.postbyid=async function(req,res){
+    await Post.find({user: req.params.id})
+    .populate("user")
+    .populate({
+        path: 'replyTo',
+        populate: {path: 'user'}
+    })
+    
+    .populate({
+        path: 'retweetData',
+        populate: {path: 'user'}
+    })
+    
+    .sort({"createdAt": -1})
+    .then(results=> res.status(200).send(results))
+    .catch(error =>{
+        console.log(error);
+    })
+
+}

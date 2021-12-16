@@ -9,4 +9,6 @@ const homeController=require('../controllers/home_controler')
 router.get('/',passport.checkAuthentication,homeController.home)
 router.use('/users',require('./users'))
 router.use('/api/posts',require('../routes/api/posts'));
+router.use('/api/users',require('../routes/api/users'));
+
 module.exports=router;

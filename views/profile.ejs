@@ -1,1 +1,120 @@
-<h1>hii this is a profile</h1>
+<h1> <%=user.name %></h1>
+
+<link rel="stylesheet" href="/css/profile.css">
+
+<div class="profileHeaderContainer">
+  <div class="coverPhotoContainer">
+
+    <div class="userImageContainer">
+      <img src="<%= user.profilePic %>" alt="your Image">
+    </div>
+
+  </div>
+  <div class="profileButtonContainer">
+    <% if(id==user._id){%>
+       <a class="profileButton" href="/messages/${user._id}"><i class="fas fa-envelope"></i></a>
+       <% var isfollow=false %>
+       <% var text=isfollow? "following" : "follow"
+       %>
+       <% var buttonClass= isfollow? "followButton following": "followButton" %>
+       <button class="<%=buttonClass %>" data-user=<%=user._id %>><%=text %></button>
+       
+    <%}%>
+  </div>
+
+  <div class="userDetailsContainer">
+    <span class="displayName"><%=user.name %></span>
+
+    <div class="followersContainer">
+      <a href="users/profile/<%=user._id %>/following">
+        <span class="value">0</span>
+        <span>following</span>
+      </a>
+      <a href="users/profile/<%=user._id %>/followers">
+        <span class="value">0</span>
+        <span>followers</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="tabsContainer">
+
+<% var isSelected=true %>
+<% var className=isSelected? "tab active" : "tab" %>
+
+<a href="/users/profile/<%=user._id%>" class="<%=className %>">
+  <span>POST,REPLIES & RETWEETS</span>
+</a>
+
+
+</div>
+
+
+</div>
+
+
+<div class="postsContainer"></div>
+
+<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="repkyModalLabel">Reply</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div id="originalPost"></div>
+            <div class="postFormContainer">
+                <div class="userImageContainer">
+                    <img src="<%= user.profilePic %> "alt="your image">
+                </div>
+                
+                <div class="textareaContainer">
+                    <textarea id="replytextarea" placeholder="Type" ></textarea>
+        </div>
+        
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
+        </div>
+      </div>
+   
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deletePostModal">Delete the post?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p> Want to Delete this</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="deletePostButton" type="button" class="btn btn-primary" >Delete</button>
+        </div>
+      </div>
+   
+    </div>
+  </div>
+ 
+
+  
+
+  <script>
+    var user="<%= user._id %>"
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/profile.js"></script>
+

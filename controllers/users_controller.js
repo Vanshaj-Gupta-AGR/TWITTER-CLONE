@@ -5,6 +5,9 @@ const User=require('../models/user')
 module.exports.profile=function(req,res){
     return res.render('profile',{
         title: "users-profile",
+        layout: "layout3",
+        id: req.params.id,
+        bol: true
     })
 }
 
@@ -68,4 +71,8 @@ module.exports.destroySession = function(req, res){
 
 
     return res.redirect('/');
+}
+
+module.exports.reply=function (req,res){
+    
 }

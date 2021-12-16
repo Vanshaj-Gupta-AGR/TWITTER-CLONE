@@ -34,6 +34,21 @@ const userSchema=new mongoose.Schema({
  
         }
     ],
+    following: [
+        {
+            type:  mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+     
+            }
+    ],
+    followers: [
+        {
+            type:  mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+     
+            }
+    ],
+
     retweet: [
         {
         type:  mongoose.Schema.Types.ObjectId,

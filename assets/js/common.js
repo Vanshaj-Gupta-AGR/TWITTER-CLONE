@@ -114,6 +114,46 @@ function timeDifference(current, previous) {
 
  })
 
+ $("#deletePostModal").on("show.bs.modal",(event)=>{
+    var btn=$(event.relatedTarget);
+
+    var postId=getid(btn);
+
+    $('#deletePostButton').data("id",postId);
+
+ })
+
+ $("#deletePostButton").click((event)=>{
+     var postId=$(event.target).data("id");
+
+     $.ajax({
+        url: `/api/posts/${postId}`,
+        type: "delete",
+        success: ()=>{
+            location.reload();
+        //   btn.find('span').text(postdata.likes.length || "");
+           
+        //   if(postdata.likes.includes(user)){
+        //       btn.addClass("active");
+        //   }
+        //   else{
+        //       btn.removeClass("active");
+        //   }
+           
+        
+        }
+       
+  
+    })
+
+     
+
+
+ })
+
+
+
+
  $("#replyModal").on("hidden.bs.modal",(event)=>{
     $("#originalPost").html="";
 
@@ -198,19 +238,6 @@ $(document).on("click",".retweetbutton",(event)=>{
    
 });
 
-$(document).on("click",".post",(event)=>{
-
-    var btn=$(event.target);
-
-    var postId=getid(btn);
-
-    if(postId!=undefined && !btn.is('button')){
-
-    window.location.href="/post/" +postId;
-    }
-
-    
-});
 
 function getid(element){
 
@@ -260,10 +287,47 @@ if(isretweet){
 }
 
 var replyflag='';
+var help="";
+
+
 
 if(postdata.replyTo){
         replyflag=`<span> Replying To <a href="/profile/${postdata.replyTo.user.name}">${postdata.replyTo.user.name}</a></span>`
-    
+       
+}
+
+else{
+    help=`<div class="postFotter">
+        <div class="postButtonContainer">
+            <button data-toggle='modal' data-target="#replyModal">
+              <i class='far fa-comment'></i>
+            </button>
+            
+
+        </div>
+        <div class="postButtonContainer green">
+            <button class="retweetbutton  ${likeButtonActiveClass}">
+              <i class='fas fa-retweet'></i>
+              <span>${postdata.retweetUsers.length || ""}</span>
+            </button>
+            
+
+        </div>
+        <div class="postButtonContainer red">
+            <button class="likebutton ${likeButtonActiveClass2}">
+              <i class='far fa-heart'></i>
+              <span>${postdata.likes.length || ""}</span>
+            </button>
+            
+
+        </div>
+    </div>`
+
+}
+
+var button="";
+if(postdata.user._id==user){
+    button=`<button data-id="${postdata._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fas fa-times"></i></button>`
 }
 
 
@@ -286,38 +350,18 @@ if(postdata.replyTo){
                     <a class="displayname" href="/users/profile/${by._id}">${by.name}</a>
                     <span class="username">@${by.name}</span>
                     <span class="date">${timestamp}</span>
+                    ${button}
                     </div>
+
+                    <div class="postBody">
+                        <span>${postdata.content}</span>
+                        </div>
+
+                    ${help}
 
                     
 
-                    <div class="postBody">
-                    <span>${postdata.content}</span>
-                    </div>
-                    <div class="postFotter">
-                        <div class="postButtonContainer">
-                            <button data-toggle='modal' data-target="#replyModal">
-                              <i class='far fa-comment'></i>
-                            </button>
-                            
-
-                        </div>
-                        <div class="postButtonContainer green">
-                            <button class="retweetbutton  ${likeButtonActiveClass}">
-                              <i class='fas fa-retweet'></i>
-                              <span>${postdata.retweetUsers.length || ""}</span>
-                            </button>
-                            
-
-                        </div>
-                        <div class="postButtonContainer red">
-                            <button class="likebutton ${likeButtonActiveClass2}">
-                              <i class='far fa-heart'></i>
-                              <span>${postdata.likes.length || ""}</span>
-                            </button>
-                            
-
-                        </div>
-                    </div>
+                   
                   </div>
                 </div>
                 </div>`
