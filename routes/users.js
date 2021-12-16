@@ -11,6 +11,7 @@ router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 router.get('/profile/replies/:id',usersController.reply)
 router.get('/sign-in',usersController.signIn);
 router.get('/sign-up',usersController.signUp);
+router.get('/profile/:id/following',usersController.following)
 
 router.post('/create', usersController.create);
 

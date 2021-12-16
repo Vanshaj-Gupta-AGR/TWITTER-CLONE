@@ -1,5 +1,7 @@
 const User=require('../models/user');
 const Post=require('../models/post_schema')
+const path=require('path');
+const fs=require('fs')
 
 module.exports.create = async function(req, res){
     try{
@@ -144,6 +146,29 @@ module.exports.onlyone=async function(req,res){
   
     
 }
+module.exports.one=async function(req,res){
+    
+    var id=req.params.id;
+
+    var user=await User.findById(id);
+
+    if(user==null){
+        return res.sendStatus(404);
+    }
+
+    var isfollowing=user.followers && user.followers.includes(req.user._id);
+
+    var option =isfollowing ? "$pull" :"$addToSet"
+
+    req.user=await User.findByIdAndUpdate(req.user._id,{ [option]: {following: id}},{new: true});
+   let user1 =await User.findByIdAndUpdate(id,{ [option]: {followers: req.user._id}},{new: true});
+
+
+    res.status(200).send(req.user);
+
+
+
+}
 
 
 module.exports.delete=async function(req,res){
@@ -173,3 +198,28 @@ module.exports.postbyid=async function(req,res){
     })
 
 }
+
+module.exports.image= async function(req,res,next){
+    if(!req.file){
+        console.log("no file uploaded");
+        return res.sendStatus(400);
+    }
+
+    var filePath=`/uploads/images/${req.file.filename}.png`;
+    var tempPath=req.file.path;
+
+    var targetPath=path.join(__dirname,`../${filePath}`)
+    fs.rename(tempPath,targetPath,async function (error){
+        if(error!=null){
+            return res.sendStatus(400);
+        }
+
+       req.user=await  User.findByIdAndUpdate(req.user._id,{profilePic: filePath},{new: true})
+
+        res.sendStatus(204);
+    });
+
+    
+}
+
+

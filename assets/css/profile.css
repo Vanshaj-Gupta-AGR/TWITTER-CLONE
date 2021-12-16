@@ -10,6 +10,9 @@
         margin-left: var(--spacing);
         position: absolute;
         bottom: -66px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
 }
 
@@ -96,6 +99,20 @@ a{
 }
 .wrapper > .row{
     margin: 0;
+}
+.profilePictureButton{
+    position: absolute;
+    font-size: 50px;
+    color: rgba(0,0,0,0.6);
+    display: none;
+}
+.userImageContainer:hover .profilePictureButton{
+        display: block;
+}
+
+#imagePreview{
+    display: block;
+    max-width: 100%;
 }
 
 

@@ -1,3 +1,4 @@
+var cropper;
 $(document).ready(()=>{
     loadposts();
 });
@@ -178,3 +179,96 @@ function timeDifference(current, previous) {
         return  Math.round(elapsed/msPerYear ) + ' years ago';   
     }
 }
+
+$(document).on('click',".followButton",(event)=>{
+    var button=$(event.target);
+    var id=button.data().user;
+
+    $.ajax({
+        url:`/api/users/${id}/follow`,
+        type: "put",
+        success: (data,status,xhr)=>{
+          if(xhr.status==404){
+              return;
+          }
+          var diff=1;
+          if(data.following && data.following.includes(id)){
+              button.addClass("following");
+              button.text('following')
+
+          }
+          else{
+              button.removeClass("following");
+              button.text('follow')
+              diff=-1;
+          }
+
+          var followerslabel=$("#followersValue");
+
+          if(followerslabel.length!=0){
+              var val=followerslabel.text();
+              val=parseInt(val)
+              followerslabel.text(val+diff);
+          }
+
+
+        }
+    })
+    
+})
+
+$('#filephoto').change(function(){
+
+    
+
+    if(this.files && this.files[0]){
+        var reader=new FileReader();
+        reader.onload=(e)=>{
+            var image=document.getElementById("imagePreview")
+           $("#imagePreview").attr("src",e.target.result);
+
+           if(cropper!==undefined){
+               cropper.destroy();
+           }
+
+           cropper= new Cropper(image,{
+               aspectRatio: 1 / 1,
+               background: false
+
+           });
+
+        }
+
+        reader.readAsDataURL(this.files[0]);
+    }
+})
+
+$("#imageUploadButton").click(function(){
+    var canvas=cropper.getCroppedCanvas();
+
+    if(canvas==null){
+        return alert('oye');
+    }
+
+    canvas.toBlob((blob)=>{
+        var formdata=new FormData();
+        formdata.append('croppedImage',blob);
+
+        console.log(formdata);
+
+        $.ajax({
+            url: '/api/users/upload',
+            type: "post",
+            data: formdata,
+            processData: false,  //stop to coverting into string
+            contentType: false,
+            success: (data)=>{
+                location.reload();
+            }
+        })
+
+
+
+
+    })
+})

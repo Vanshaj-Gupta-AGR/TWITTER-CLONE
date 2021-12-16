@@ -2,12 +2,16 @@ const User=require('../models/user')
 
 
 
-module.exports.profile=function(req,res){
+module.exports.profile=async function(req,res){
+
+var user2=await User.findById(req.params.id);
+
     return res.render('profile',{
         title: "users-profile",
         layout: "layout3",
         id: req.params.id,
-        bol: true
+        user1: user2
+        
     })
 }
 
@@ -74,5 +78,9 @@ module.exports.destroySession = function(req, res){
 }
 
 module.exports.reply=function (req,res){
+    
+}
+
+module.exports.following=async function (res,res){
     
 }
