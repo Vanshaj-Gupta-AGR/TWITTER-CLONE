@@ -222,4 +222,28 @@ module.exports.image= async function(req,res,next){
     
 }
 
+module.exports.cover= function (req,res){
+
+    if(!req.file){
+        console.log("no file uploaded");
+        return res.sendStatus(400);
+    }
+
+    var filePath=`/uploads/images/${req.file.filename}.png`;
+    var tempPath=req.file.path;
+
+    var targetPath=path.join(__dirname,`../${filePath}`)
+    fs.rename(tempPath,targetPath,async function (error){
+        if(error!=null){
+            return res.sendStatus(400);
+        }
+
+       req.user=await  User.findByIdAndUpdate(req.user._id,{cover: filePath},{new: true})
+
+        res.sendStatus(204);
+    });
+
+
+}
+
 

@@ -272,3 +272,59 @@ $("#imageUploadButton").click(function(){
 
     })
 })
+
+$('#Coverphoto').change(function(){
+
+    
+
+    if(this.files && this.files[0]){
+        var reader=new FileReader();
+        reader.onload=(e)=>{
+            var image=document.getElementById("coverPreview")
+           $("#coverPreview").attr("src",e.target.result);
+
+           if(cropper!==undefined){
+               cropper.destroy();
+           }
+
+           cropper= new Cropper(image,{
+               aspectRatio: 16 / 9,
+               background: false
+
+           });
+
+        }
+
+        reader.readAsDataURL(this.files[0]);
+    }
+})
+
+$("#CoverButton").click(function(){
+    var canvas=cropper.getCroppedCanvas();
+
+    if(canvas==null){
+        return alert('oye');
+    }
+
+    canvas.toBlob((blob)=>{
+        var formdata=new FormData();
+        formdata.append('croppedImage',blob);
+
+        console.log(formdata);
+
+        $.ajax({
+            url: '/api/users/upload/cover',
+            type: "post",
+            data: formdata,
+            processData: false,  //stop to coverting into string
+            contentType: false,
+            success: (data)=>{
+                location.reload();
+            }
+        })
+
+
+
+
+    })
+})
