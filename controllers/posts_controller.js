@@ -245,5 +245,31 @@ module.exports.cover= function (req,res){
 
 
 }
+module.exports.pin=async function (req,res){
+        if(req.body.pinned!==undefined){
+         await Post.updateMany({user: req.user._id},{pinned: false})
+        }
+
+        await Post.findByIdAndUpdate(req.params.id,req.body);
+
+        console.log(req.body)
+
+        return res.sendStatus(200);
+
+}
+
+module.exports.unpin=async function (req,res){
+    if(req.body.pinned!==undefined){
+     await Post.updateMany({user: req.user._id},{pinned: false})
+    }
+
+    await Post.findByIdAndUpdate(req.params.id,req.body);
+
+    console.log(req.body)
+
+    return res.sendStatus(200);
+
+}
+
 
 

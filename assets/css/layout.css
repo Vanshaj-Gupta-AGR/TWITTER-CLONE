@@ -207,6 +207,15 @@ h1{
     flex:1;
 }
 
+.pinButton.active{
+    color: var(--blue);
+
+}
+.pinnedPostText{
+    font-size: 12px;
+    color: var(--greybuttonText)
+}
+
 
 
 

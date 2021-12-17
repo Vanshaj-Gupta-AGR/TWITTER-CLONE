@@ -122,6 +122,22 @@ function timeDifference(current, previous) {
     $('#deletePostButton').data("id",postId);
 
  })
+ $("#confirmPinModal").on("show.bs.modal",(event)=>{
+    var btn=$(event.relatedTarget);
+
+    var postId=getid(btn);
+
+    $('#confirmPinButton').data("id",postId);
+
+ })
+ $("#unpinModal").on("show.bs.modal",(event)=>{
+    var btn=$(event.relatedTarget);
+
+    var postId=getid(btn);
+
+    $('#unpinButton').data("id",postId);
+
+ })
 
  $("#deletePostButton").click((event)=>{
      var postId=$(event.target).data("id");
@@ -150,6 +166,48 @@ function timeDifference(current, previous) {
 
 
  })
+
+ $("#confirmPinButton").click((event)=>{
+    var postId=$(event.target).data("id");
+
+    $.ajax({
+       url: `/api/posts/${postId}/pin`,
+       type: "put",
+       data: {pinned: true},
+       success: ()=>{
+           location.reload();
+     
+       
+       }
+      
+ 
+   })
+
+    
+
+
+})
+
+$("#unpinButton").click((event)=>{
+    var postId=$(event.target).data("id");
+
+    $.ajax({
+       url: `/api/posts/${postId}/unpin`,
+       type: "put",
+       data: {pinned: false},
+       success: ()=>{
+           location.reload();
+     
+       
+       }
+      
+ 
+   })
+
+    
+
+
+})
 
 
 
@@ -328,8 +386,18 @@ else{
 }
 
 var button="";
+var pinnedText="";
 if(postdata.user._id==user){
-    button=`<button data-id="${postdata._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fas fa-times"></i></button>`
+    var pinClass="";
+    var dataTarget="#confirmPinModal";
+    if(postdata.pinned==true){
+        pinClass="active"
+        dataTarget="#unpinModal"
+        pinnedText="<i class='fas fa-thumbtack'></i> <span>Pinned Post</span>"
+    }
+           button =`<button class="pinButton ${pinClass}" data-id="${postdata._id}" data-toggle="modal" data-target="${dataTarget}"><i class="fas fa-thumbtack"></i></button>
+            <button data-id="${postdata._id}" data-toggle="modal" data-target="#deletePostModal"><i class="fas fa-times"></i></button>`
+           
 }
 
 
@@ -348,6 +416,7 @@ if(postdata.user._id==user){
                   <img src="${by.profilePic}">
                   </div>
                   <div class="postContentContainer">
+                  <div class="pinnedPostText">${pinnedText}</div>
                     <div class="header">
                     <a class="displayname" href="/users/profile/${by._id}">${by.name}</a>
                     <span class="username">@${by.name}</span>

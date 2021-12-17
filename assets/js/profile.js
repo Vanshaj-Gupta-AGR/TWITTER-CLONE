@@ -9,6 +9,7 @@ $(document).ready(()=>{
         
         output(results, $(".postsContainer"));
     })
+   
 }
 function output(result,container){
     container.html("");
