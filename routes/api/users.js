@@ -11,4 +11,5 @@ router.put("/:id/follow",postCreate.one);
 router.post('/upload',upload.single("croppedImage"),postCreate.image)
 router.post('/upload/cover',upload.single("croppedImage"),postCreate.cover)
 
+
 module.exports=router

@@ -1,7 +1,8 @@
 const User=require('../models/user');
 const Post=require('../models/post_schema')
 const path=require('path');
-const fs=require('fs')
+const fs=require('fs');
+const { post } = require('../routes');
 
 module.exports.create = async function(req, res){
     try{
@@ -252,7 +253,6 @@ module.exports.pin=async function (req,res){
 
         await Post.findByIdAndUpdate(req.params.id,req.body);
 
-        console.log(req.body)
 
         return res.sendStatus(200);
 
@@ -265,10 +265,20 @@ module.exports.unpin=async function (req,res){
 
     await Post.findByIdAndUpdate(req.params.id,req.body);
 
-    console.log(req.body)
+  
 
     return res.sendStatus(200);
 
+}
+
+module.exports.postssearch=function (req,res){
+    
+   return res.status(200).send('hi')
+
+   
+}
+module.exports.userssearch=function (req,res){
+    
 }
 
 

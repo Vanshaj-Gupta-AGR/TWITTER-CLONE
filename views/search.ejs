@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/search.css">
+
+
+<div class="searchBarContainer">
+    <i class="fas fa-search"></i>
+    <input id="searchBox" type="text" name="searchBox", data-search="<%=selectedTab %>" placeholder="Search for user or post">
+</div>
+
+
+<div class="tabsContainer">
+    <% var className = selectedTab!="users" ? "tab active" : "tab" %>
+     <a href="/search/posts" class="<%=className%>"><span>Posts</span></a>
+     <% var className %>
+     <% className = selectedTab=="users" ? "tab active" : "tab" %>
+      <a href="/search/users" class="<%=className%>"><span>Users</span></a>
+</div>    
+<div class="resultsContainer">
+
+</div>      
+<script>
+    var user="<%= user._id %>"
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/search.js"></script>
