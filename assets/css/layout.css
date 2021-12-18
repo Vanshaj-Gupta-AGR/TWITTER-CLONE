@@ -119,8 +119,8 @@ h1{
     padding: 7px 15px;
 }
 #submitpost:disabled{
-    background-color: var(--blue);
-    color: var(--bluelight);
+    background-color: var(--blueLight);
+    color: var(--lightGrey);
 }
 
 .post{

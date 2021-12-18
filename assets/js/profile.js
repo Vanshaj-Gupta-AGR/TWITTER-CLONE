@@ -26,6 +26,42 @@ function output(result,container){
 
     });
 }
+$("#deletePostModal").on("show.bs.modal",(event)=>{
+    var btn=$(event.relatedTarget);
+
+    var postId=getid(btn);
+
+    $('#deletePostButton').data("id",postId);
+
+ })
+$("#deletePostButton").click((event)=>{
+    var postId=$(event.target).data("id");
+
+    $.ajax({
+       url: `/api/posts/${postId}`,
+       type: "delete",
+       success: ()=>{
+           location.reload();
+       //   btn.find('span').text(postdata.likes.length || "");
+          
+       //   if(postdata.likes.includes(user)){
+       //       btn.addClass("active");
+       //   }
+       //   else{
+       //       btn.removeClass("active");
+       //   }
+          
+       
+       }
+      
+ 
+   })
+
+    
+
+
+})
+
 function createPostHtml(postdata){
 
     if(postdata==null){

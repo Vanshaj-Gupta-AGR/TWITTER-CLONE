@@ -49,7 +49,10 @@ module.exports.temp=async function(req,res){
      
     
     
-    .then(results=> res.status(200).send(results))
+    .then(results=> res.status(200).send({
+        result: results,
+        user: req.user
+    }))
     .catch(error =>{
         console.log(error);
     })
