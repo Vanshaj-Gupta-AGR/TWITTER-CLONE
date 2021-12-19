@@ -66,6 +66,7 @@ module.exports.temp3=function(req,res){
    
     Chat.find({users:{ "$in": req.user._id } })
     .populate("users")
+    .sort({updatedAt:-1})
     .then(results=>res.status(200).send({
         results: results,
         userlog: req.user

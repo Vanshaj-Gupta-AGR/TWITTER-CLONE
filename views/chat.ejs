@@ -1,0 +1,29 @@
+
+
+<link rel="stylesheet" href="/css/chat.css">
+
+<div class="chatPageContainer">
+    <div class="chatTitleBarContainer">
+        <div class="chatImagesContainer">
+            <% var i= 0 %>
+
+              <% for(user of chat.users) {%>
+
+                <% if(i<3){%>
+                  <img src="<%= user.profilePic %>" alt="your image">
+                  <% i+=1 %>
+                <%}%>
+              <%}%>
+        </div>
+
+        <span id="chatName">This is the chat</span></div>
+    <div class="mainContentContainer">
+        <div class="chatContainer">
+            <div class="chatMessages"></div>
+           
+            
+            <div class="footer"><textarea name="messageInput" placeholder="Type a message..."></textarea><button class="sendMessageButton"><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+    </div>
+</div>
+
