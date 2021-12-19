@@ -34,7 +34,7 @@ function search(searchTerms,searchType){
             success: (data)=>{
                if(searchType=="users"){
                   
-                    outputUsers(data,$(".resultsContainer"))
+                    outputUsers(data.result,$(".resultsContainer"))
 
                }
                else{

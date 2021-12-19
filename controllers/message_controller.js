@@ -23,6 +23,8 @@ module.exports.chat=function(req,res){
 
    var users=JSON.parse(req.body.users);
 
+   console.log(users)
+
    if(users.length==0){
     return res.sendStatus(400);
 }
@@ -48,3 +50,4 @@ module.exports.chat=function(req,res){
 
 
 }
+

@@ -17,6 +17,8 @@ router.get('/uploads/images/:path',homeController.image)
 router.use('/search',require('./search'));
 router.post("/api/us/sr",homeController.temp)
 router.post("/api/ps/sr",homeController.temp1)
+router.post("/old/oops",homeController.temp3);
+
 
 
 module.exports=router;

@@ -1,6 +1,7 @@
 const path=require('path');
 const User=require('../models/user');
 const Post=require('../models/post_schema')
+const Chat=require('../models/chat_schema')
 module.exports.home=function(req,res){
    return res.render('home',{
        title: "Home"
@@ -59,4 +60,20 @@ module.exports.temp=async function(req,res){
 
 
 }
+
+
+module.exports.temp3=function(req,res){
+   
+    Chat.find({users:{ "$in": req.user._id } })
+    .populate("users")
+    .then(results=>res.status(200).send({
+        results: results,
+        userlog: req.user
+    }))
+    .catch(error=>{
+        console.log(error);
+        res.sendStatus(400);
+    })
+}
+
 

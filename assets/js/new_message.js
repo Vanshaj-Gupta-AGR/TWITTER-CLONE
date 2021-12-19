@@ -40,7 +40,7 @@ $('#createChatButton').click(()=>{
    
    $.post('/messages/chat',{users: data},chat=>{
        console.log(chat)
-    //   window.location.href="/messages/${chat._id}";
+      window.location.href=`/messages/${chat._id}`;
 
    })
 
