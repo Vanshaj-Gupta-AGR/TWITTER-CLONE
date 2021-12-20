@@ -1,6 +1,7 @@
 const User=require('../models/user');
 const Post=require('../models/post_schema')
 const Chat=require('../models/chat_schema')
+const Message=require('../models/message_schema')
 const mongoose=require('mongoose');
 module.exports.message=function (req,res){
         res.status(200).render('message',{
@@ -24,7 +25,7 @@ module.exports.chat=function(req,res){
 
    var users=JSON.parse(req.body.users);
 
-   console.log(users)
+  
 
    if(users.length==0){
     return res.sendStatus(400);
@@ -89,5 +90,43 @@ function getChatByUserId(userLoggedInId,otherUserId){
         upsert: true
     })
     .populate('users');
+}
+
+module.exports.chatname= function(req,res){
+    Chat.findByIdAndUpdate(req.params.id, { chatName: req.body.chatName })
+    .populate('users')
+    .then((result)=>{
+        return res.status(200).send({
+            chat: result,
+            userlog: req.user
+        });
+    })
+   
+}
+module.exports.getchatname= function(req,res){
+    Chat.find({_id: req.params.id})
+    .populate('users')
+    .then((result)=>{
+        return res.status(200).send({
+            chat: result,
+            userlog: req.user
+        });
+    })
+   
+   
+}
+
+module.exports.sendmessage=async function (req,res){
+   
+    var newMessage={
+        sender: req.user._id,
+        content: req.body.content,
+        chat: req.body.chatId
+    }
+
+    var msg =await Message.create(newMessage)
+
+    return res.status(200).send(msg);
+
 }
 

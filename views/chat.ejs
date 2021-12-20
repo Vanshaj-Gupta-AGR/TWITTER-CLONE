@@ -16,14 +16,44 @@
               <%}%>
         </div>
 
-        <span id="chatName">This is the chat</span></div>
+        <span data-toggle="modal" data-target="#chatNameModal" id="chatName"><%=chat.chatName%></span></div>
     <div class="mainContentContainer">
         <div class="chatContainer">
             <div class="chatMessages"></div>
            
             
-            <div class="footer"><textarea name="messageInput" placeholder="Type a message..."></textarea><button class="sendMessageButton"><i class="fas fa-paper-plane"></i></button></div>
+            <div class="footer"><textarea id="inputTextbox" name="messageInput" placeholder="Type a message..."></textarea><button class="sendMessageButton"><i class="fas fa-paper-plane"></i></button></div>
         </div>
     </div>
 </div>
 
+
+
+<div class="modal fade" id="chatNameModal" tabindex="-1" role="dialog" aria-labelledby="chatNameModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="chatNameModal">Change the Chat Name</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <input type="text" placeholder="Enter a name for chat" id="chatNameTextbox" value=<%=chat.chatName%>>
+         
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="chatNameButton" type="button" class="btn btn-primary" >Change</button>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+
+<script>
+  var chat="<%= chat._id %>"
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/chat_page.js"></script>

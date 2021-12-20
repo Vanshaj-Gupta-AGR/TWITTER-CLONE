@@ -8,6 +8,9 @@ router.get('/',messageController.message);
 router.get('/new',messageController.new_message);
 router.post('/chat',messageController.chat);
 router.get("/:id",messageController.chatting)
+router.put('/chatname/:id',messageController.chatname);
+router.get('/chatname/:id',messageController.getchatname);
+router.post('/message',messageController.sendmessage);
 
 
 

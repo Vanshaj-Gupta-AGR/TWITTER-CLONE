@@ -33,14 +33,14 @@ function outputChatList(chatlist,userlog,container){
 }
 
 function createChatHtml(chatdata,userlog){
-    var chatName=getChatName(chatdata,userlog);
+    var chatName1=getChatName(chatdata,userlog);
     var img=getchatImageElements(chatdata,userlog);
     var latestMessage="THIS IS A"
 
     return `<a class='resultListItem' href='/messages/${chatdata._id}'>
                 ${img}
             <div class="resultsDetailsContainer ellipsis">
-             <span class="heading ellipsis">${chatName}</span>
+             <span class="heading ellipsis">${chatName1}</span>
              <span class="subText  ellipsis">${latestMessage}</span>
 
             </div>
