@@ -71,14 +71,26 @@ a:hover {
     display: flex;
     flex-direction: column;
     min-height: 0;
-    flex-basis: 0;
     flex: 1;
+    flex-basis: 0;
+    
 }
+
 .chatTitleBarContainer {
     border-bottom: 1px solid var(--lightGrey);
     display: flex;
     align-items: center;
     padding: var(--spacing);
+}
+.chatTitleBar {
+    border-bottom: 1px solid var(--lightGrey);
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 10px;
+}
+.chatTitleBar label {
+    margin: 0 10px 0 0;
 }
 
 #chatName {
@@ -114,6 +126,7 @@ a:hover {
     padding: 8px 12px;
     height: 38px;
     overflow: hidden;
+   
    
 }
 
