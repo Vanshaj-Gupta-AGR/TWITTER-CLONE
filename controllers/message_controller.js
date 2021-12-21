@@ -116,7 +116,7 @@ module.exports.getchatname= function(req,res){
    
 }
 
-module.exports.sendmessage=async function (req,res){
+module.exports.sendmessage= function (req,res){
    
     var newMessage={
         sender: req.user._id,
@@ -124,9 +124,36 @@ module.exports.sendmessage=async function (req,res){
         chat: req.body.chatId
     }
 
-    var msg =await Message.create(newMessage)
+    Message.create(newMessage)
+    .then(async result=>{
+        result=await result.populate("sender")
+        result=await result.populate("chat")
 
-    return res.status(200).send(msg);
+        var chat=await Chat.findByIdAndUpdate(req.body.chatId,{latestMessage: result});
 
+        
+
+        return res.status(200).send({
+            message: result,
+            userlog: req.user
+        });
+    })
+   
+}
+
+module.exports.getmessages= async function(req,res){
+    Message.find({chat: req.params.id})
+    .populate("sender")
+    .populate("readBy")
+    .then((result)=>{
+        return res.status(200).send({
+            messages: result,
+            userlog: req.user
+        });
+    })
+
+    
+   
+   
 }
 
