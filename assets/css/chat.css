@@ -258,6 +258,22 @@ a:hover {
     margin-bottom: 7px;
 }
 
+.typingDots img{
+    background-color: #f1f0f0;
+ 
+  
+    font-size: 14px;
+}
+.typingDots img{
+    height: 75px;
+
+}
+.typingDots{
+    padding: var(--spacing);
+    padding-bottom: 0;
+    display: none
+}
+
 
 
 

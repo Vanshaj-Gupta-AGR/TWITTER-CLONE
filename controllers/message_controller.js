@@ -128,6 +128,9 @@ module.exports.sendmessage= function (req,res){
     .then(async result=>{
         result=await result.populate("sender")
         result=await result.populate("chat")
+        result=await User.populate(result,{path: "chat.users"})
+        
+
 
         var chat=await Chat.findByIdAndUpdate(req.body.chatId,{latestMessage: result});
 
