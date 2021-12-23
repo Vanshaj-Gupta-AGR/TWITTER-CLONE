@@ -1,5 +1,6 @@
 const User=require('../models/user');
 const Post=require('../models/post_schema')
+const Notification=require('../models/notification_schema')
 const path=require('path');
 const fs=require('fs');
 const { post } = require('../routes');
@@ -21,6 +22,13 @@ module.exports.create = async function(req, res){
         if (req.xhr){
        
             post=await User.populate(post,{path: "user"});
+            post=await Post.populate(post,{path: "replyTo"});
+            
+
+             
+     if(post.replyTo!=undefined){
+        await Notification.insertNotification(post.replyTo.user,req.user._id,"post commented",post._id);
+    }
 
           return res.status(201).send(post)
         }
@@ -71,6 +79,12 @@ module.exports.update=async function(req,res){
      
      var post=await  Post.findByIdAndUpdate(req.params.id,{[option]: {likes: req.user._id}},{new: true});
 
+
+     
+     if(!islike){
+        await Notification.insertNotification(post.user,req.user._id,"post liked",post._id);
+    }
+
      return res.status(200).send(post)
      
 
@@ -113,6 +127,11 @@ module.exports.retweet=async function(req,res){
            
         
         var post=await  Post.findByIdAndUpdate(req.params.id,{[option]: {retweetUsers: req.user._id}},{new: true});
+
+
+        if(!deletedPost){
+            await Notification.insertNotification(post.user,req.user._id,"retweet",post._id);
+        }
    
         return res.status(200).send(post)
         
@@ -163,6 +182,10 @@ module.exports.one=async function(req,res){
 
     req.user=await User.findByIdAndUpdate(req.user._id,{ [option]: {following: id}},{new: true});
    let user1 =await User.findByIdAndUpdate(id,{ [option]: {followers: req.user._id}},{new: true});
+
+   if(!isfollowing){
+       await Notification.insertNotification(id,req.user._id,"follow",req.user._id);
+   }
 
 
     res.status(200).send(req.user);

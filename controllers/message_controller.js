@@ -2,6 +2,7 @@ const User=require('../models/user');
 const Post=require('../models/post_schema')
 const Chat=require('../models/chat_schema')
 const Message=require('../models/message_schema')
+const Notification=require('../models/notification_schema')
 const mongoose=require('mongoose');
 module.exports.message=function (req,res){
         res.status(200).render('message',{
@@ -134,6 +135,8 @@ module.exports.sendmessage= function (req,res){
 
         var chat=await Chat.findByIdAndUpdate(req.body.chatId,{latestMessage: result});
 
+        insertNotificationTochat(chat,result);
+
         
 
         return res.status(200).send({
@@ -142,6 +145,17 @@ module.exports.sendmessage= function (req,res){
         });
     })
    
+}
+
+function insertNotificationTochat(chat,message){
+
+    chat.users.forEach((userId) => {
+        if(userId==message.sender._id.toString())return;
+
+        Notification.insertNotification(userId,message.sender._id,"newMessage",message.chat._id);
+        
+    });
+
 }
 
 module.exports.getmessages= async function(req,res){

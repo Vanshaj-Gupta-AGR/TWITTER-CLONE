@@ -60,11 +60,11 @@ const io=require('socket.io')(server,{pingTimeout: 60000});
 
 io.on("connection",(socket)=>{
 
-    socket.on("setup",(user)=>{
-        socket.join(user);
-        socket.emit("connected");
+    // socket.on("setup",(user)=>{
+    //     socket.join(user);
+    //     socket.emit("connected");
        
-    })
+    // })
 
     socket.on("joinroom",(room)=>{
         socket.join(room);
@@ -81,7 +81,7 @@ io.on("connection",(socket)=>{
       
     })
     socket.on("new message",(newmessage)=>{
-        console.log(newmessage.message.chat)
+        
 
         var chat=newmessage.message.chat;
 
