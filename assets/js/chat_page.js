@@ -68,6 +68,22 @@ $("#chatNameButton").click(()=>{
     })
 })
 
+socket.on("message received",(newmessage)=>{
+   
+   
+    messageRecived(newmessage.message);
+ 
+ })
+ 
+ function messageRecived(newmessage){
+     if($(".chatContainer").length==0){
+ 
+     }
+     else{
+         addChatMessageHtml(newmessage);
+     }
+ }
+
 function getChatName(chatData,userlog){
     var chatName= chatData.chatName;
 
@@ -172,20 +188,7 @@ function addChatMessageHtml(message){
 
 }
 
-socket.on("message recieved",(newmessage)=>{
-   
-    messageRecived(newmessage);
- 
- })
- 
- function messageRecived(newmessage){
-     if($(".chatContainer").length==0){
- 
-     }
-     else{
-         addChatMessageHtml(newmessage);
-     }
- }
+
 
 function createMessageHtml(message,nextMeassage,lastSenderId){
 

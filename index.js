@@ -60,13 +60,16 @@ const io=require('socket.io')(server,{pingTimeout: 60000});
 
 io.on("connection",(socket)=>{
 
-    // socket.on("setup",(user)=>{
-    //     socket.join(user);
-    //     socket.emit("connected");
+    socket.on("setup",(userp)=>{
+        socket.join(userp);
        
-    // })
+        socket.emit("connected");
+       
+    })
 
     socket.on("joinroom",(room)=>{
+        console.log("room_joined")
+        console.log(room);
         socket.join(room);
        
     })
@@ -81,17 +84,25 @@ io.on("connection",(socket)=>{
       
     })
     socket.on("new message",(newmessage)=>{
-        
+        console.log(newmessage.message.chat)
 
         var chat=newmessage.message.chat;
 
+    
+        
+
         if(!chat.users)return ;
 
-        chat.users.forEach(user => {
-            if(user._id==newmessage.message.sender._id){
-                return ;
+        chat.users.forEach(user1 => {
+            if(user1._id==newmessage.message.sender._id){
+             
+                
+               
             }
-            socket.in(user._id).emit("message received",newmessage);
+            else{
+            
+            socket.in(user1._id).emit("message received",newmessage);
+            }
             
         });
 

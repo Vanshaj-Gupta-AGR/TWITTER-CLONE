@@ -80,5 +80,7 @@ module.exports.temp3=function(req,res){
         res.sendStatus(400);
     })
 }
-
+module.exports.vansh=function (req,res){
+    return res.status(200).send(req.user)
+}
 
