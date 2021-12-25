@@ -8,7 +8,16 @@ module.exports.home=function (req,res){
 }
 
 module.exports.getall=function(req,res){
-   Notification.find({userTo: req.user._id,notificationType: {$ne: "newMessage"}})
+
+
+var searchObj= {userTo: req.user._id,notificationType: {$ne: "newMessage"}};
+
+if(req.query.unreadOnly!==undefined && req.query.unreadOnly=="true"){
+    searchObj.opened=false;
+}
+
+
+   Notification.find(searchObj)
    .populate("userTo")
    .populate("userFrom")
    .sort({createdAt: -1})
@@ -28,4 +37,15 @@ module.exports.mark=function(req,res){
     .then(results=>{
         return res.status(200).send(results)
     })
+ }
+
+ module.exports.latest=function(req,res){
+       Notification.findOne({userTo: req.user._id})
+       .populate("userTo")
+       .populate("userFrom")
+       .sort({createdAt: -1})
+       .then(results=>{
+           res.status(200).send(results)
+       })
+
  }

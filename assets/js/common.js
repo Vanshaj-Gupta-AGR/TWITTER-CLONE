@@ -1,5 +1,8 @@
 $(document).ready(()=>{
+    refreshMessage();
+    refreshNotification();
 })
+
 $("#posttextarea, #replytextarea").keyup(event=>{
     var textbox=$(event.target);
     var value=textbox.val().trim();
@@ -46,6 +49,7 @@ $('#submitpost, #submitReplyButton').click((event)=>{
   
     $.post("/api/posts",data,(postData,status,xhr)=>{
         if(postData.replyTo){
+            emitNotification(postData.replyTo.user)
             location.reload();
         }
         else{
@@ -236,6 +240,7 @@ $(document).on("click",".likebutton",(event)=>{
          
         if(postdata.likes.includes(user)){
             btn.addClass("active");
+            emitNotification(postdata.user)
         }
         else{
             btn.removeClass("active");
@@ -281,6 +286,7 @@ $(document).on("click",".retweetbutton",(event)=>{
 
         if(postdata.retweetUsers.includes(user)){
             btn.addClass("active");
+            emitNotification(postdata.user)
         }
         else{
             btn.removeClass("active");
@@ -309,6 +315,40 @@ function getid(element){
 
     return postid;
 }
+
+function refreshMessage(){
+    console.log("okay5")
+    $.post('/old/oops',{unreadOnly: true},(data)=>{
+       var numresults=data.results.length;
+
+       if(numresults>0){
+           $("#messagesBadge").text(numresults).addClass("active");
+
+       }
+       else{
+           $("#messagesBadge").text("").removeClass("active")
+       }
+    })
+}
+
+
+
+function refreshNotification(){
+    $.get('/notifications/getall',{unreadOnly: true},(data)=>{
+       var numresults=data.length;
+
+       if(numresults>0){
+           $("#notificationBadge").text(numresults).addClass("active");
+
+       }
+       else{
+           $("#notificationBadge").text("").removeClass("active")
+       }
+    })
+}
+
+
+
 
 function createPostHtml(postdata){
 
@@ -436,5 +476,15 @@ if(postdata.user._id==user){
                   </div>
                 </div>
                 </div>`
+}
+
+
+function showpopup(data){
+    var html =createnoty(data);
+    var element=$(html);
+    element.hide().prependTo(".notificationList").slideDown("fast")
+    console.log(html)
+
+    setTimeout(()=>element.fadeOut(400),5000);
 }
 

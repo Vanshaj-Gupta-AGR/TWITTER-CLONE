@@ -26,8 +26,26 @@ $.ajax({
 
 })
 
+  socket.on("notification received",(notification)=>{
+    $.get('/notifications/latest',(data)=>{
+      showpopup(data)
+      refreshNotification();
+    })
+  })
+
+  
 
   }
 })
+
+function emitNotification(userId){
+  if(userId==userlog._id){
+    return ;
+  }
+  
+
+  socket.emit("notification received",userId);
+}
+
 
 

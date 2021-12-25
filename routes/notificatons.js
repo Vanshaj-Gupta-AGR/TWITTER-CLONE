@@ -8,6 +8,7 @@ router.get("/",notification_controller.home);
 router.get("/getall",notification_controller.getall);
 router.put("/:id/mark",notification_controller.mark);
 router.put("/mark",notification_controller.markonlyone);
+router.get('/latest',notification_controller.latest)
 
 
 

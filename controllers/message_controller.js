@@ -173,4 +173,7 @@ module.exports.getmessages= async function(req,res){
    
    
 }
-
+module.exports.lastone=function (req,res){
+    Message.updateMany({chat: req.params.id},{$addToSet: {readBy: req.user._id}})
+    .then(()=>res.sendStatus(204));
+}

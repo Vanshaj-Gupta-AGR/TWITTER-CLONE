@@ -71,10 +71,16 @@ module.exports.temp3=function(req,res){
         populate: {path: 'sender'}
     })
     .sort({updatedAt:-1})
-    .then(results=>res.status(200).send({
+    .then(results=>
+        {
+            if(req.query.unreadOnly!==undefined && req.query.unreadOnly=="true"){
+                results=results.filter(r=>r.latestMessage && !r.latestMessage.readBy.includes(req.user._id));
+            }
+
+        res.status(200).send({
         results: results,
         userlog: req.user
-    }))
+    })})
     .catch(error=>{
         console.log(error);
         res.sendStatus(400);

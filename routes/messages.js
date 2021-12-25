@@ -12,6 +12,7 @@ router.put('/chatname/:id',messageController.chatname);
 router.get('/chatname/:id',messageController.getchatname);
 router.get('/chatname/:id/message',messageController.getmessages);
 router.post('/message',messageController.sendmessage);
+router.put('/:id/okay',messageController.lastone)
 
 
 

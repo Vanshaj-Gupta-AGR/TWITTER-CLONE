@@ -34,6 +34,7 @@ $(document).ready(()=>{
 
         addmessagesHtmltoPage(messageHtml);
         scrollToBottom(false);
+        markallmessagesasread();
 
 
 
@@ -76,12 +77,24 @@ socket.on("message received",(newmessage)=>{
  })
  
  function messageRecived(newmessage){
-     if($(".chatContainer").length==0){
- 
+     if($(`[data-room="${newmessage.chat._id}"]`).length==0){
+
      }
      else{
          addChatMessageHtml(newmessage);
      }
+       refreshMessage()
+
+ }
+
+ function markallmessagesasread(){
+     $.ajax({
+         url: `/messages/${chat}/okay`,
+         type: "put",
+         success: ()=>{
+         console.log("hi")
+         refreshMessage()
+      } })
  }
 
 function getChatName(chatData,userlog){

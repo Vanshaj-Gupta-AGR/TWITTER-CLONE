@@ -83,6 +83,10 @@ io.on("connection",(socket)=>{
         socket.in(room).emit("stop typing")
       
     })
+    socket.on("notification received",(room)=>{
+        socket.in(room).emit("notification received")
+      
+    })
     socket.on("new message",(newmessage)=>{
         console.log(newmessage.message.chat)
 
