@@ -1,36 +1,68 @@
 
 <link rel="stylesheet" href="/css/temp.css">
-<div class="parent clearfix">
-    <div class="bg-illustration">
-  
 
-      <div class="burger-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
 
-    </div>
-    
-    <div class="login">
-      <div class="container">
-        <h1>Create <br />your account</h1>
-    
-        <div class="login-form">
-            <form action="/users/create" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+  <section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+            alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           
-            
-            <button type="submit">SIGN-UP</button>
+          <div class="d-flex flex-row align-items-center justify-content-center">
+            <a href="/users/auth/google">
+            <button class="loginBtn loginBtn--google">
+              Sign-up with google
+              
+            </button>
+          </a>
+          </div>
 
+          
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">REGISTER</p>
+          </div>
+
+          <form action="/users/create" method="post">
+
+            
+            
+            
+  
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form3Example3" class="form-control form-control-lg"
+                placeholder="Your Name" name="name"  required/>
+            
+            </div>
+  
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <input type="email" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Your Email" name="email" required />
+            </div>
+            <div class="form-outline mb-3">
+              <input type="password" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Your Password" name="password" required/>
+            </div>
+            <div class="form-outline mb-3">
+              <input type="password" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Confirm Password" name="confirm_password" required/>
+            </div>
+
+  
+           
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">SUBMIT</button>
+              </div>
+  
+  
           </form>
         </div>
-    
       </div>
-      </div>
-  </div>
-
-  
+    </div>
+   
+  </section>

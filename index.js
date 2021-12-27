@@ -10,6 +10,7 @@ const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy')
 const sassMiddleware=require('node-sass-middleware');
 const path=require('path');
+const passportGoogle=require('./config/passport-google-oauth2-strategy')
 
 
 
