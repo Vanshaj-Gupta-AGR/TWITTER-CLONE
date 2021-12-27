@@ -18,6 +18,7 @@ module.exports.create = async function(req, res){
         }
 
         let post = await Post.create(postData);
+        req.flash("success",'POST created!')
         
         if (req.xhr){
        
@@ -30,6 +31,8 @@ module.exports.create = async function(req, res){
         await Notification.insertNotification(post.replyTo.user,req.user._id,"post commented",post._id);
     }
 
+
+      
           return res.status(201).send(post)
         }
 
@@ -39,7 +42,7 @@ module.exports.create = async function(req, res){
     }catch(err){
        
       
-        console.log(err);
+       req.flash("error",err)
         return res.redirect('back');
     }
   

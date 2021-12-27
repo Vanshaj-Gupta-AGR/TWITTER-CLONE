@@ -44,7 +44,7 @@ module.exports.signIn = function(req, res){
 module.exports.create = function(req, res){
     if (req.body.password != req.body.confirm_password){
 
-        console.log('chutiya')
+     req.flash('error',"password not matched")
      
         return res.redirect('back');
     }
@@ -56,9 +56,11 @@ module.exports.create = function(req, res){
             User.create(req.body, function(err, user){
                 if(err){console.log(err); return}
 
+                req.flash('success','Register Successfully')
                 return res.redirect('/users/sign-in');
             })
         }else{
+            req.flash("error","User already exist")
             return res.redirect('back');
         }
 
@@ -67,14 +69,15 @@ module.exports.create = function(req, res){
 
 
 module.exports.createSession = function(req, res){
+    req.flash('success','Logged in Successfully')
     return res.redirect('/');
 }
 
 module.exports.destroySession = function(req, res){
     req.logout();
+    req.flash('success','You have logged out')
 
-
-    return res.redirect('/');
+    return res.redirect('/users/sign-in');
 }
 
 module.exports.reply=function (req,res){
