@@ -16,7 +16,34 @@ a:hover {
     border-bottom: 1px solid var(--lightGrey);
     flex-shrink: 0;
 }
+.profileButton,.followButton{
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 60px;
+    display: inline-block;
+    margin-left: var(--spacing);
 
+}
+
+.profileButton:hover,.followButton:hover{
+    background-color: var(--blueback);
+}
+.followButton.following{
+    background-color: var(--blue);
+    color: #fff;
+}
+.followersContainer .value{
+    font-weight: bold;
+    margin-right: 5px;
+
+}
+.followersContainer span:not(.value){
+    color: var(--greyText);
+
+
+}
 .tab {
     flex: 1;
     height: 52px;

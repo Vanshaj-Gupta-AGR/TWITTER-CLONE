@@ -122,6 +122,7 @@ function timeDifference(current, previous) {
     var btn=$(event.relatedTarget);
 
     var postId=getid(btn);
+    console.log(postId)
 
     $('#deletePostButton').data("id",postId);
 
@@ -310,6 +311,8 @@ function getid(element){
     var isroot=element.hasClass("post");
 
     var rootelement=isroot? element : element.closest(".post");
+
+    console.log(rootelement)
    
     var postid=rootelement.data().id;
 

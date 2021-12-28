@@ -12,6 +12,17 @@
     --green: rgb(23,191,99);
     --greenBackground: rgba(23,191,99,0.1);
 }
+ul{
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+    background-color: #fff;
+    font-weight: 300;
+}
+
 *{
     outline: none !important;
 }
@@ -22,6 +33,13 @@ a{
 .yu{
     color: var(--blue)
 }
+
+h1 {
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0;
+}
+
 
 a:hover{
     color: inherit;
@@ -47,10 +65,22 @@ nav a{
 }
 
 
+
+
 nav a:hover{
-    background-color: var(--buttonhover);
+    background-color: var(--buttonHoverBg);
     color: var(--blue);
     border-radius: 50%;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.wrapper > .row {
+    margin: 0;
+    height: 100%;
 }
 button{
     background-color: transparent;
@@ -62,8 +92,8 @@ button i,button span{
 }
 .mainSectionContainer{
     padding: 0;
-    border-left: 1px solid var(--lightgrey);
-    border-right: 1px solid var(--lightgrey);
+    border-left: 1px solid var(--lightGrey);
+    border-right: 1px solid var(--lightGrey);
     display: flex;
     flex-direction: column;
 
@@ -74,7 +104,7 @@ button i,button span{
     padding: 0 var(--spacing);
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--lightgrey);
+    border-bottom: 1px solid var(--lightGrey);
 
 }
 h1{
@@ -90,6 +120,15 @@ h1{
     display: flex;
     padding: var(--spacing);
     border-bottom: 10px solid rgb(230,236,240) ;
+}
+.modal .postFormContainer {
+    border: none;
+    padding: 0;
+    padding-top: var(--spacing);
+}
+
+.modal .post {
+    padding: 0 0 var(--spacing) 0;
 }
 .userImageContainer{
     width: 50px;
@@ -132,12 +171,13 @@ a{
     flex-direction: column;
     padding: var(--spacing);
     cursor: pointer;
-    border-bottom: 1px solid var(--lightgrey);
+    border-bottom: 1px solid var(--lightGrey);
     
 }
 .mainContentContainer{
     flex: 1;
     display: flex;
+    overflow-y: hidden;
 
 }
 .postContentContainer{
@@ -147,7 +187,7 @@ a{
     flex: 1;
 }
 .username,.date{
-    color: rgb(101,119,134);
+    color: var(--greyText)
 }
 .displayname{
     font-weight: bold;
@@ -184,15 +224,25 @@ a{
 .postButtonContainer.red button.active{
     color: var(--red);
 }
+.postButtonContainer.red button:hover {
+    color: var(--red);
+    background-color: var(--redBackground)
+}
+
 .postButtonContainer.green button.active{
     color: var(--green);
 }
+.postButtonContainer.green button:hover {
+    color: var(--green);
+    background-color: var(--greenBackground)
+}
+
 
 .postActionContainer{
     padding-left: 35px;
     font-size: 13px;
-    color: var(--greybuttonText);
-    margin-bottom: var(--spacing);
+    color: var(--greyText);
+    margin-bottom: 5px;
 }
 
 .modal .postFormContainer{
@@ -451,6 +501,14 @@ a{
     border: 3px solid #fff;
     
 }
+.replyFlag {
+    margin-bottom: 5px;
+}
+
+.replyFlag a {
+    color: var(--blue);
+}
+
 
 .groupChatImage img:first-of-type{
     top: 0;

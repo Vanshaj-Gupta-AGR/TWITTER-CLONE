@@ -1,4 +1,14 @@
 var timer;
+var user;
+
+$(document).ready(()=>{
+    $.get('/u',(data)=>{
+        user=data;
+        console.log(user)
+    })
+
+
+})
 
 $("#searchBox").keydown((event)=>{
     clearTimeout(timer);
@@ -229,6 +239,42 @@ if(postdata.user._id==user){
                 </div>
                 </div>`
 }
+$(document).on('click',".followButton",(event)=>{
+    var button=$(event.target);
+    var id=button.data().user;
+
+    $.ajax({
+        url:`/api/users/${id}/follow`,
+        type: "put",
+        success: (data,status,xhr)=>{
+          if(xhr.status==404){
+              return;
+          }
+          var diff=1;
+          if(data.following && data.following.includes(id)){
+              button.addClass("following");
+              button.text('following')
+
+          }
+          else{
+              button.removeClass("following");
+              button.text('follow')
+              diff=-1;
+          }
+
+          var followerslabel=$("#followersValue");
+
+          if(followerslabel.length!=0){
+              var val=followerslabel.text();
+              val=parseInt(val)
+              followerslabel.text(val+diff);
+          }
+
+
+        }
+    })
+    
+})
 function outputUsers(results, container) {
     container.html("");
 
@@ -251,7 +297,7 @@ function createUserHtml(userData, showFollowButton) {
     var buttonClass = isFollowing ? "followButton following" : "followButton"
 
     var followButton = "";
-    if (showFollowButton && user!== userData._id) {
+    if (showFollowButton && user._id!= userData._id) {
         followButton = `<div class='followButtonContainer'>
                             <button class='${buttonClass}' data-user='${userData._id}'>${text}</button>
                         </div>`;
