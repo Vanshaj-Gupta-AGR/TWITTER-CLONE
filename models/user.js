@@ -53,6 +53,10 @@ const userSchema=new mongoose.Schema({
      
             }
     ],
+    resetPassword: {
+        type: String
+},
+
 
     retweet: [
         {

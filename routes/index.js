@@ -20,6 +20,7 @@ router.post("/api/ps/sr",homeController.temp1)
 router.post("/old/oops",homeController.temp3);
 router.use('/notifications',require('./notificatons'));
 router.get('/u',homeController.vansh);
+router.use('/request',require('./passswordReset'));
 
 
 
