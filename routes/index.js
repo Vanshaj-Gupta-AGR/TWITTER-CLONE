@@ -21,6 +21,8 @@ router.post("/old/oops",homeController.temp3);
 router.use('/notifications',require('./notificatons'));
 router.get('/u',homeController.vansh);
 router.use('/request',require('./passswordReset'));
+router.put('/chats/leaveChat/:id',homeController.leave)
+router.put('/chats/:id/addNewMember',homeController.add);
 
 
 

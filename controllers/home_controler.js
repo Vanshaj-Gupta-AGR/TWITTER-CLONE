@@ -90,3 +90,22 @@ module.exports.vansh=function (req,res){
     return res.status(200).send(req.user)
 }
 
+module.exports.leave= function(req,res){
+    console.log(req.params.id)
+    Chat.findByIdAndUpdate(req.params.id, {$pull: {users: req.user._id}})
+    .then(() => res.sendStatus(204))
+    .catch(error => {
+        console.log(error)
+        res.status(400)
+    })
+}
+module.exports.add =function (req,res){
+    console.log(req.params.id)
+    console.log(req.body)
+    Chat.findByIdAndUpdate(req.params.id, {$addToSet: {users: req.body}})
+    .then(() => res.sendStatus(204))
+    .catch(error => {
+        console.log(error)
+        res.status(400)
+    })
+}

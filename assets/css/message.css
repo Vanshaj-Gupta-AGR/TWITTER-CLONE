@@ -153,3 +153,7 @@ a{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.leaveChat{
+    pointer-events: painted;
+}  
+    

@@ -544,4 +544,8 @@ a{
     background-color: white;
 }
 
+.leaveChat{
+    pointer-events: painted;
+}
+
 

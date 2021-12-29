@@ -86,7 +86,7 @@ else {
     <p>http://localhost:8000/request/passwordReset?id=${uniqueId}</p>`
 
     nodeMailer.transporter.sendMail({
-       from: 'twitterClone',
+       from: 'twitter Clone',
        to:  findEmail,
        subject: "password change!",
        html: htmlString

@@ -13,7 +13,7 @@ $(document).ready(()=>{
    })
 
 
-    
+
           
       
     
@@ -36,6 +36,7 @@ function createChatHtml(chatdata,userlog){
     var chatName1=getChatName(chatdata,userlog);
     var img=getchatImageElements(chatdata,userlog);
     var latestMessage=getlatest(chatdata.latestMessage);
+    
 
     var activeClass=!chatdata.latestMessage || chatdata.latestMessage.readBy.includes(userlog._id)? "": "active";
 
@@ -46,6 +47,7 @@ function createChatHtml(chatdata,userlog){
              <span class="subText  ellipsis">${latestMessage}</span>
 
             </div>
+           
             </a>`
     
 }
@@ -100,3 +102,8 @@ function getUserChatImagesElement(user){
     }
     return `<img src="${user.profilePic}" alt="pic">`
 }
+
+
+
+
+

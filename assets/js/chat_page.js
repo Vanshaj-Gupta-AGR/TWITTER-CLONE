@@ -1,6 +1,7 @@
 var userlog;
 var typing=false;
 var lastTypingTime;
+var users;
 $(document).ready(()=>{
 
     socket.emit("joinroom",chat);
@@ -99,7 +100,7 @@ socket.on("message received",(newmessage)=>{
 
 function getChatName(chatData,userlog){
     var chatName= chatData.chatName;
-
+users=chatData.users;
     if(!chatName){
         var otherChatUsers= getOtherChatUsers(chatData.users,userlog);
         var namesArray=otherChatUsers.map(user1=>{
@@ -260,6 +261,36 @@ function createMessageHtml(message,nextMeassage,lastSenderId){
 
             </li>`
 }
+$(document).on("click", (e) => {
+    const target = $(e.target)
+    if(target.hasClass("leaveChat")){
+        if(target.data().id != null) {
+            swal({
+                title: "Are you sure?",
+                text: "once exited you will no longer the member of this group",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: `/chats/leaveChat/${chat}`,
+                        type: "PUT", 
+                        success: () => window.location.href='/messages',
+                        error: () => confirm("Could not update. Please try again")
+                    })
+                } else {
+                  
+                }
+              });
+        }
+        return false
+    }
+})
+
+
+
 
 function scrollToBottom(animated){
     var container=$('.chatMessages')
@@ -275,4 +306,112 @@ function scrollToBottom(animated){
 
 }
 
+let timer, userToAdd
+ 
+const searchBox = $("#addNewUserModalTextBox")
+const addUser = $("#addNewUserModalButton")
+ 
+if(searchBox != null) {
+    searchBox.on("keydown", function(event) {
+        clearTimeout(timer);
+        const textbox = $(this)
+        let value = textbox.val()
+    
+        if (value === "" && event.keyCode === 8) {
+            $(".userList").html("");
+            return;
+        }
+    
+        timer = setTimeout(() => {
+            value = textbox.val().trim();
+    
+            if(value === "") {
+                $(".userList").html("");
+            }
+            else {
+                searchUsers(value);
+            }
+        }, 1000)
+    })
+}
+ 
+function searchUsers(searchTerms) {
+    // $.get("/api/us/sr", { search: searchTerm }, results => {
+    //     outputSelectableUsers(results, $(".userList"));
+    // })
 
+    $.ajax({
+        url: "/api/us/sr",
+        type: "post",
+        data: {obj: searchTerms},
+        success: (data)=>{
+            outputSelectableUsers(data.result,$(".userList"))
+  
+        }
+
+    })
+}
+ 
+function outputSelectableUsers(results, container) {
+    container.html("");
+ 
+    results.forEach(result => {
+        
+        if(users.some(user => user._id === result._id)) {
+            return;
+        }
+ 
+        const html = createUserHtml(result);
+        const element = $(html);
+        element.click(() => userSelected(result))
+ 
+        container.append(element);
+    });
+ 
+}
+ 
+function createUserHtml(userData) {
+    const name = userData.name
+    
+    return `<div class='user'>
+                <div class='userImageContainer'>
+                    <img src='${userData.profilePic}'>
+                </div>
+                <div class='userDetailsContainer'>
+                    <div class='header'>
+                        <a href='#'>${name}</a>
+                        <span class='username'>@${userData.name}</span>
+                    </div>
+                </div>
+            </div>`;
+}
+ 
+function userSelected(user) {
+    searchBox.val(user.name).focus();
+    $(".userList").html("");
+    userToAdd = user
+}
+ 
+if(addUser != null) {
+    addUser.on("click", () => {
+        if(userToAdd == null) {
+            alert("No user selected. Please try again")
+            return
+        }
+        else {
+            $.ajax({
+                url: `/chats/${chat}/addNewMember`,
+                data: userToAdd,
+                type: "PUT", 
+                success: () => location.reload(),
+                error: () => confirm("Could not update. Please try again")
+            })
+        }
+    })
+}
+ 
+$("#addNewUserModal").on("hidden.bs.modal", () => {
+    searchBox.val("")
+    $(".userList").html("")
+    userToAdd = null
+});

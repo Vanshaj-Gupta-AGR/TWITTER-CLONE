@@ -1,9 +1,12 @@
 
 
+
 <link rel="stylesheet" href="/css/chat.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <div class="chatPageContainer">
     <div class="chatTitleBarContainer">
+
         <div class="chatImagesContainer">
             <% var i= 0 %>
 
@@ -16,7 +19,23 @@
               <%}%>
         </div>
 
-        <span data-toggle="modal" data-target="#chatNameModal" id="chatName"><%=chat.chatName%></span></div>
+        <span data-toggle="modal" data-target="#chatNameModal" id="chatName"><%=chat.chatName%></span>
+        <% if(chat && chat.isGroupChat){%>
+          <div class="titleContainer">
+
+                <i class="far fa-plus-square"  data-toggle="modal" data-target="#addNewUserModal" title="Add a new user"></i>
+            </a>
+  
+        </div>
+
+       <button>
+          <i class='fa fa-times leaveChat' data-id="${chatData._id}" title="Leave this chat"></i>
+        </button>`
+
+        <%}%>
+        
+      
+      </div>
     <div class="mainContentContainer" data-room=<%=chat._id%>>
 
       
@@ -59,6 +78,20 @@
   </div>
 </div>
 
+<div class="modal fade" id="addNewUserModal" tabindex="-1" role="dialog" aria-labelledby="addNewUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="addNewUserModalLabel">Add a new user to this chat</h5><button class="close" type="button" data-dismiss="modal" aria-label="Close"></button><span aria-hidden="true">&times;</span>
+          </div>
+          <div class="modal-body"><input id="addNewUserModalTextBox" type="text" autocomplete="off" style="width: 100%;" />
+              <div class="userList" style="overflow-y: scroll; max-height: 200px; margin-top: 10px;"></div>
+          </div>
+          <div class="modal-footer"><button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button><button class="btn btn-primary" id="addNewUserModalButton" type="button">Add user</button></div>
+      </div>
+  </div>
+</div>
+
 <script>
   var chat="<%= chat._id %>"
 </script>
@@ -66,6 +99,8 @@
 <script>
   var user="<%= user._id %>"
 </script>
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
