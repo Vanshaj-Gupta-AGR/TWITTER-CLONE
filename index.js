@@ -2,7 +2,7 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
 
-const port=8000;
+const port=process.env.port || 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');
@@ -58,7 +58,9 @@ app.use(customMware.setFlash);
 
 app.use('/',require('./routes/index'))
 
-
+if(process.env.NODE_ENV=='Production'){
+    
+}
 
 
 const server=app.listen(port,function(err){

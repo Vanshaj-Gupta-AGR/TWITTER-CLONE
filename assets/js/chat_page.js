@@ -267,7 +267,7 @@ $(document).on("click", (e) => {
         if(target.data().id != null) {
             swal({
                 title: "Are you sure?",
-                text: "once exited you will no longer the member of this group",
+                text: "Once Exited You Will no Longer be the Member of this Group!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

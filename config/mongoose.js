@@ -1,6 +1,6 @@
 const mongoose =require('mongoose');
 
-mongoose.connect('mongodb://localhost/clone_development');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/clone_development');
 
 const db=mongoose.connection;
 
