@@ -14,7 +14,8 @@ module.exports.message=function (req,res){
 
 module.exports.new_message=function (req,res){
     res.status(200).render('new_message',{
-        title: "New Message"
+        title: "New Message",
+        layout: "layout3"
     })
 
 }
