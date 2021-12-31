@@ -1,11 +1,11 @@
 {
-  "name": "music_player",
+  "name": "twitter_clone",
   "version": "1.0.0",
-  "description": "my music player web app",
+  "description": "my  web app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "vanshaj gupta",
   "license": "ISC",
