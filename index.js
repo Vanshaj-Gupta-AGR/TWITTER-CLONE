@@ -1,11 +1,12 @@
 const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
-const dburl="mongodb+srv://vansh_gupta:9639001475@cluster0.bv6wh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const dburl="mongodb+srv://vansh_gupta:9639001475@cluster0.bv6wh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" || 'mongodb://localhost/clone_development'
 const port= process.env.PORT || 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');
+const MongoDbStore=require('connect-mongo')
 
 const flash=require('connect-flash');
 const passport=require('passport');
@@ -13,7 +14,8 @@ const passportLocal=require('./config/passport-local-strategy')
 const sassMiddleware=require('node-sass-middleware');
 const path=require('path');
 const passportGoogle=require('./config/passport-google-oauth2-strategy')
-const customMware=require('./config/middleware')
+const customMware=require('./config/middleware');
+const MongoStore = require('connect-mongo')(session)
 
 // app.use(sassMiddleware({
 //     src: './assets/scss',
@@ -41,14 +43,24 @@ app.set('views','./views');
 
 
 
+
 app.use(session({
     name: 'codeial',
     secret: "blahsomething",
     saveUninitialized: false,
     resave: false,
+    proxy: true,
     cookie: {
         maxAge: (1000 * 60 * 100)
     },
+    store: new MongoStore({
+        mongooseConnection: db,
+        autoReconnect: true
+     },function(err){
+         console.log(err ||"connect-ok")
+         
+     })
+    
 }));
 
 

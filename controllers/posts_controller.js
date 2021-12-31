@@ -18,7 +18,7 @@ module.exports.create = async function(req, res){
         }
 
         let post = await Post.create(postData);
-        req.flash("success",'POST created!')
+
         
         if (req.xhr){
        
