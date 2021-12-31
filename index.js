@@ -2,7 +2,7 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
 const dburl="mongodb+srv://vansh_gupta:9639001475@cluster0.bv6wh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const port=process.env.port || 8000;
+const port= process.env.port || 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');

@@ -5,7 +5,7 @@ var userlog;
 
 
 
-var socket = io("http://localhost:8000", {
+var socket = io("https://secret-plateau-80086.herokuapp.com", {
   transports: ["websocket", "polling", "flashsocket"],
 });
 
