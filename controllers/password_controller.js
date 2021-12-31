@@ -81,9 +81,9 @@ else {
     
     let htmlString=`You have requested a password change. 
     <p>Please follow this link to change your password:</p>
-    <a href="http://localhost:8000/request/passwordReset?id=${uniqueId}">Click here</a>
+    <a href="https://secret-plateau-80086.herokuapp.com/request/passwordReset?id=${uniqueId}">Click here</a>
     <br><br>If you don't see the link, please copy and paste this line in your browser's address bar:
-    <p>http://localhost:8000/request/passwordReset?id=${uniqueId}</p>`
+    <p>https://secret-plateau-80086.herokuapp.com/request/passwordReset?id=${uniqueId}</p>`
 
     nodeMailer.transporter.sendMail({
        from: 'twitter Clone',
