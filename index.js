@@ -1,11 +1,12 @@
 const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
-
+const dburl="mongodb+srv://vansh_gupta:9639001475@cluster0.bv6wh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const port=process.env.port || 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');
+
 const flash=require('connect-flash');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy')
@@ -13,6 +14,7 @@ const sassMiddleware=require('node-sass-middleware');
 const path=require('path');
 const passportGoogle=require('./config/passport-google-oauth2-strategy')
 const customMware=require('./config/middleware')
+
 // app.use(sassMiddleware({
 //     src: './assets/scss',
 //     dest: './assets/css',
@@ -36,6 +38,8 @@ app.set('layout extractScripts', true);
 
 app.set('view engine','ejs');
 app.set('views','./views');
+
+
 
 app.use(session({
     name: 'codeial',
