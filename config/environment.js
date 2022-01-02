@@ -34,7 +34,7 @@ const production = {
     },
     google_clientID: "479595391274-rpubadnma6ovkkcejsamfs2pudcg3dti.apps.googleusercontent.com",
     google_clientSecret: "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",
-    google_callbackURL: "https://secret-plateau-80086.herokuapp.com/users/auth/google/callback",
+    google_callbackURL: "https://twitter-by-dev.herokuapp.com/users/auth/google/callback",
     morgan: {
         mode: 'combined',
         options: {stream: accessLogStream}
