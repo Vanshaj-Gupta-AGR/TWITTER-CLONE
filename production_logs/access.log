@@ -82,3 +82,6 @@
 ::1 - - [02/Jan/2022:10:38:55 +0000] "GET /api/posts HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
 ::1 - - [02/Jan/2022:10:38:57 +0000] "POST /api/posts HTTP/1.1" 201 575 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
 ::1 - - [02/Jan/2022:10:38:59 +0000] "POST /api/posts HTTP/1.1" 201 573 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+[0mGET /users/sign-in [0m-[0m - ms - -[0m
+[0mGET / [36m302[0m 4.952 ms - 72[0m
+[0mGET / [0m-[0m - ms - -[0m
