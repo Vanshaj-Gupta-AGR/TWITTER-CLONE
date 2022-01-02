@@ -85,3 +85,40 @@
 [0mGET /users/sign-in [0m-[0m - ms - -[0m
 [0mGET / [36m302[0m 4.952 ms - 72[0m
 [0mGET / [0m-[0m - ms - -[0m
+[0mGET / [36m302[0m 335.715 ms - 72[0m
+[0mGET /users/sign-in [32m200[0m 260.557 ms - 3883[0m
+[0mGET /users/css/temp.css [33m404[0m 237.683 ms - 157[0m
+::ffff:127.0.0.1 - - [02/Jan/2022:11:30:43 +0000] "GET / HTTP/1.1" 302 72 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::ffff:127.0.0.1 - - [02/Jan/2022:11:30:43 +0000] "GET /users/sign-in HTTP/1.1" 200 3895 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+[0mGET / [36m302[0m 6.619 ms - 72[0m
+[0mGET /users/sign-in [32m200[0m 814.190 ms - 3883[0m
+[0mGET /users/css/temp.css [33m404[0m 241.172 ms - 157[0m
+::ffff:127.0.0.1 - - [02/Jan/2022:11:32:16 +0000] "GET / HTTP/1.1" 302 72 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::ffff:127.0.0.1 - - [02/Jan/2022:11:32:16 +0000] "GET /users/sign-in HTTP/1.1" 200 3895 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::ffff:127.0.0.1 - - [02/Jan/2022:11:32:18 +0000] "GET /users/auth/google HTTP/1.1" 302 0 "http://127.0.0.1:8000/users/sign-in" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:22 +0000] "GET /users/auth/google/callback?code=4%2F0AX4XfWjuJEiX9jNplBZ6T5szi6VP6D8c3ZTknqjXjOa-BXna0Wx_X8aaBAkp2a1WO3ViVA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=1&prompt=consent HTTP/1.1" 302 46 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:23 +0000] "GET / HTTP/1.1" 200 8633 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:23 +0000] "GET /undefined HTTP/1.1" 404 148 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:24 +0000] "GET /undefined HTTP/1.1" 404 148 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:27 +0000] "POST /old/oops HTTP/1.1" 200 497 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:27 +0000] "GET /notifications/getall?unreadOnly=true HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:27 +0000] "GET /messages HTTP/1.1" 200 3047 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:28 +0000] "GET /notifications/getall HTTP/1.1" 200 1207 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:28 +0000] "GET /api/posts HTTP/1.1" 200 4479 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:29 +0000] "GET /users/profile/61cec5cb6d39eb85a3fdd25c HTTP/1.1" 200 10311 "http://localhost:8000/messages" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:29 +0000] "POST /old/oops HTTP/1.1" 200 497 "http://localhost:8000/messages" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:31 +0000] "GET /api/users/61cec5cb6d39eb85a3fdd25c HTTP/1.1" 200 1467 "http://localhost:8000/users/profile/61cec5cb6d39eb85a3fdd25c" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:31 +0000] "GET /search HTTP/1.1" 200 3347 "http://localhost:8000/users/profile/61cec5cb6d39eb85a3fdd25c" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:31 +0000] "GET /u HTTP/1.1" 200 472 "http://localhost:8000/search" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:32 +0000] "GET /notifications HTTP/1.1" 200 3361 "http://localhost:8000/search" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:33 +0000] "GET /u HTTP/1.1" 304 - "http://localhost:8000/notifications" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:33 +0000] "GET /notifications/getall HTTP/1.1" 304 - "http://localhost:8000/notifications" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:33 +0000] "GET / HTTP/1.1" 200 8225 "http://localhost:8000/notifications" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:34 +0000] "GET /undefined HTTP/1.1" 404 148 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:35 +0000] "POST /old/oops HTTP/1.1" 200 497 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:35 +0000] "GET /notifications/getall?unreadOnly=true HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:35 +0000] "GET /notifications/getall HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::1 - - [02/Jan/2022:11:32:35 +0000] "GET /api/posts HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::ffff:127.0.0.1 - - [02/Jan/2022:11:33:10 +0000] "GET /users/sign-in HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::ffff:127.0.0.1 - - [02/Jan/2022:11:34:20 +0000] "GET / HTTP/1.1" 302 72 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+::ffff:127.0.0.1 - - [02/Jan/2022:11:34:20 +0000] "GET /users/sign-in HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"

@@ -1,7 +1,6 @@
 const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
-const dburl='mongodb://localhost/clone_development'
 const port= process.env.PORT || 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
