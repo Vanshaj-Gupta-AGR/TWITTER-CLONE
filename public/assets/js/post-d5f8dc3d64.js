@@ -1,0 +1,1 @@
+function output(t,a){a.html(""),Array.isArray(t)||(t=[t]),t.forEach((t=>{var o=createPostHtml(t);a.append(o)}))}$(document).ready((()=>{$.get("/api/posts",(t=>{output(t,$(".postsContainer"))}))}));

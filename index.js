@@ -2,12 +2,13 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
 const dburl='mongodb://localhost/clone_development'
-const port= 8000;
+const port= process.env.port || 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');
 const MongoDbStore=require('connect-mongo')
 const logger=require('morgan');
+
 
 const flash=require('connect-flash');
 const passport=require('passport');
@@ -18,6 +19,7 @@ const passportGoogle=require('./config/passport-google-oauth2-strategy')
 const customMware=require('./config/middleware');
 const MongoStore = require('connect-mongo')(session)
 const env=require('./config/environment');
+require('./config/view-helpers')(app);
 
 // app.use(sassMiddleware({
 //     src: './assets/scss',

@@ -1,6 +1,6 @@
 <h1> <%=user1.name %></h1>
 
-<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="<%= assetPath('css/profile.css') %>">
 
 <% var followerscount=user1.followers.length %>
 <% var followingcount=user1.following.length %>
@@ -252,5 +252,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   
-<script src="/js/profile.js"></script>
+<script src="<%= assetPath('js/profile.js') %>"></script>
 
