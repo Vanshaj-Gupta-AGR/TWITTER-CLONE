@@ -1,12 +1,13 @@
 const express=require('express');
 const cookieParser=require('cookie-parser');
 const app=express();
-const dburl="mongodb+srv://vansh_gupta:9639001475@cluster0.bv6wh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" || 'mongodb://localhost/clone_development'
-const port= process.env.PORT || 8000;
+const dburl='mongodb://localhost/clone_development'
+const port= 8000;
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const session=require('express-session');
 const MongoDbStore=require('connect-mongo')
+const logger=require('morgan');
 
 const flash=require('connect-flash');
 const passport=require('passport');
@@ -16,6 +17,7 @@ const path=require('path');
 const passportGoogle=require('./config/passport-google-oauth2-strategy')
 const customMware=require('./config/middleware');
 const MongoStore = require('connect-mongo')(session)
+const env=require('./config/environment');
 
 // app.use(sassMiddleware({
 //     src: './assets/scss',
@@ -30,8 +32,10 @@ const MongoStore = require('connect-mongo')(session)
 app.use(express.urlencoded());
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 app.use(expressLayouts);
+
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
@@ -44,9 +48,10 @@ app.set('views','./views');
 
 
 
+
 app.use(session({
     name: 'codeial',
-    secret: "blahsomething",
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     proxy: true,
@@ -74,9 +79,6 @@ app.use(customMware.setFlash);
 
 app.use('/',require('./routes/index'))
 
-if(process.env.NODE_ENV=='Production'){
-    
-}
 
 
 const server=app.listen(port,function(err){

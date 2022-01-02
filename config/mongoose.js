@@ -1,6 +1,7 @@
 const mongoose =require('mongoose');
+const env=require('./environment');
 
-const dburl="mongodb+srv://vansh_gupta:9639001475@cluster0.bv6wh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" ||'mongodb://localhost/clone_development'
+const dburl=`mongodb://localhost/${env.db}`
 
 mongoose.connect(dburl);
 

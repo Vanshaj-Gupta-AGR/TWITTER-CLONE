@@ -2,14 +2,15 @@ const passport=require('passport');
 const googlestrategy=require('passport-google-oauth').OAuth2Strategy;
 const crypto=require('crypto');
 const User=require('../models/user');
+const env=require('./environment');
 
 
 
 
 passport.use(new googlestrategy({
-    clientID: "479595391274-rpubadnma6ovkkcejsamfs2pudcg3dti.apps.googleusercontent.com",
-    clientSecret: "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",
-    callbackURL: "https://secret-plateau-80086.herokuapp.com/users/auth/google/callback",
+    clientID: env.google_clientID,
+    clientSecret: env.google_clientSecret,
+    callbackURL: env.google_callbackURL,
    },
    function(accessToken,refreshToken,profile,done){
         User.findOne({email: profile.emails[0].value}).exec(function(err,user){
