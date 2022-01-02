@@ -5,7 +5,7 @@ var userlog;
 
 
 
-var socket = io("https://secret-plateau-80086.herokuapp.com", {
+var socket = io("https://twitter-by-dev.herokuapp.com", {
   transports: ["websocket", "polling", "flashsocket"],
 });
 
