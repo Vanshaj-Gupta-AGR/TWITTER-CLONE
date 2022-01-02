@@ -1,8 +1,7 @@
 var connected=false;
 var userlog;
 
-
-
+var t;
 
 
 var socket = io("https://twitter-by-dev.herokuapp.com", {

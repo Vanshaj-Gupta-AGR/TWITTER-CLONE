@@ -6,14 +6,5 @@
   "css/profile.css": "css/profile-e2708c224c.css",
   "css/search.css": "css/search-0e8f5690bc.css",
   "css/status.css": "css/status-c8761e1f42.css",
-  "css/temp.css": "css/temp-59822639ec.css",
-  "js/chat_page.js": "js/chat_page-d5e28a3ac1.js",
-  "js/common.js": "js/common-e95a02aaa5.js",
-  "js/inbox.js": "js/inbox-8e165caa2f.js",
-  "js/new_message.js": "js/new_message-7f22dbc2e6.js",
-  "js/notification.js": "js/notification-4826d5b633.js",
-  "js/post.js": "js/post-d5f8dc3d64.js",
-  "js/profile.js": "js/profile-c72a69d7d3.js",
-  "js/search.js": "js/search-a3e1e43186.js",
-  "js/sockets.js": "js/sockets-bbc84c2c7d.js"
+  "css/temp.css": "css/temp-59822639ec.css"
 }
